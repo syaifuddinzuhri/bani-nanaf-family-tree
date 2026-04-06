@@ -28,6 +28,61 @@ const activeMaxGen = computed(() => {
 });
 const getTreeData = (rootId: string | undefined) =>
   rootId ? listToTree(getFamilyData(rootId), null) : [];
+
+const showDeleteModal = ref(false);
+const memberToDelete = ref<FamilyMember | null>(null);
+const showEditModal = ref(false);
+const selectedMember = ref<FamilyMember | null>(null);
+
+// Handler Edit
+const onEdit = (member: FamilyMember) => {
+  selectedMember.value = member;
+  showEditModal.value = true;
+};
+
+// Handler Hapus (Cascade Delete Confirmation)
+const onDelete = (member: FamilyMember) => {
+  memberToDelete.value = member;
+  showDeleteModal.value = true;
+};
+
+// Handler Simpan
+const onSave = (updatedData: FamilyMember) => {
+  // Update di Firebase (atau rawData.value untuk dummy)
+  const index = rawData.value.findIndex((m) => m.id === updatedData.id);
+  if (index !== -1) {
+    rawData.value[index] = updatedData;
+  }
+  showEditModal.value = false;
+};
+
+const getDescendantIds = (parentId: string): string[] => {
+  let ids: string[] = [];
+  const children = rawData.value.filter((m) => m.parentId === parentId);
+
+  children.forEach((child) => {
+    ids.push(child.id);
+    ids = [...ids, ...getDescendantIds(child.id)]; // Ambil anak dari anak (rekursif)
+  });
+
+  return ids;
+};
+
+// 3. Eksekusi Hapus Permanen
+const confirmDelete = () => {
+  if (!memberToDelete.value) return;
+
+  const targetId = memberToDelete.value.id;
+  const descendantIds = getDescendantIds(targetId);
+  const allIdsToDelete = [targetId, ...descendantIds];
+
+  // Filter rawData: Buang semua ID yang masuk daftar hapus
+  rawData.value = rawData.value.filter((m) => !allIdsToDelete.includes(m.id));
+
+  // Tutup Modal
+  showDeleteModal.value = false;
+  memberToDelete.value = null;
+};
 </script>
 <template>
   <div class="min-h-screen bg-[#F8FAFC] font-sans text-slate-900">
@@ -63,11 +118,28 @@ const getTreeData = (rootId: string | undefined) =>
               :viewType="viewType"
               :treeData="getTreeData(activeTab)"
               :maxGen="activeMaxGen"
+              @edit="onEdit"
+              @delete="onDelete"
             />
           </div>
         </div>
       </div>
     </div>
+
+    <FamilyDeleteModal
+      :show="showDeleteModal"
+      :name="memberToDelete?.name || ''"
+      @close="showDeleteModal = false"
+      @confirm="confirmDelete"
+    />
+
+    <FamilyMemberModal
+      :show="showEditModal"
+      :member="selectedMember"
+      :allMembers="rawData"
+      @close="showEditModal = false"
+      @save="onSave"
+    />
 
     <LayoutFooter />
   </div>

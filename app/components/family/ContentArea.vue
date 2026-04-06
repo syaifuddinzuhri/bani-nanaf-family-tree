@@ -6,6 +6,8 @@ defineProps<{
   treeData: FamilyMemberNode[];
   maxGen: number;
 }>();
+
+defineEmits(["edit", "delete"]);
 </script>
 
 <template>
@@ -17,6 +19,8 @@ defineProps<{
         :key="node.id"
         :rootNode="node"
         :maxGen="maxGen"
+        @edit="(val) => $emit('edit', val)"
+        @delete="(val) => $emit('delete', val)"
       />
     </div>
 

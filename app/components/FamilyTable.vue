@@ -1,26 +1,28 @@
 <script setup lang="ts">
-import type { FamilyMemberNode } from "~/types/family";
+import { Edit2, Trash2, User } from "lucide-vue-next";
+import type { FamilyMember, FamilyMemberNode } from "~/types/family";
 
 const props = defineProps<{
   rootNode: FamilyMemberNode;
-  maxGen: number; // Tambahkan prop ini
+  maxGen: number;
 }>();
 
+const emit = defineEmits(["edit", "delete"]);
 const { generateGrid } = useTableGrid();
-// Kirim props.maxGen ke helper grid
 const gridData = computed(() => generateGrid(props.rootNode, props.maxGen));
 </script>
 
 <template>
-  <div class="overflow-x-auto border-2 border-slate-300 shadow-sm rounded-xl">
-    <table class="w-full border-collapse bg-white">
+  <div
+    class="overflow-x-auto border-2 border-slate-200 shadow-sm rounded-2xl bg-white"
+  >
+    <table class="w-full border-collapse">
       <thead>
-        <tr class="bg-slate-50 border-b-2 border-slate-300">
-          <!-- Loop header berdasarkan maxGen -->
+        <tr class="bg-slate-50 border-b-2 border-slate-200">
           <th
             v-for="n in maxGen"
             :key="n"
-            class="p-3 border-r border-slate-300 text-left text-[10px] font-black uppercase text-slate-500 tracking-widest w-[220px]"
+            class="p-4 border-r border-slate-200 text-left text-[10px] font-black uppercase text-slate-500 tracking-widest min-w-[220px]"
           >
             Generasi {{ n }}
           </th>
@@ -30,24 +32,62 @@ const gridData = computed(() => generateGrid(props.rootNode, props.maxGen));
         <tr
           v-for="(row, rowIndex) in gridData"
           :key="rowIndex"
-          class="h-16 border-b border-slate-100 transition hover:bg-slate-50/50"
+          class="group h-20 border-b border-slate-100 hover:bg-slate-50/50 transition-colors"
         >
           <td
             v-for="(cell, colIndex) in row"
             :key="colIndex"
-            class="p-3 border-r border-slate-100 min-w-[220px] align-top"
+            class="p-4 border-r border-slate-100 align-top relative"
           >
-            <div v-if="cell" class="animate-in fade-in zoom-in-95 duration-500">
-              <div
-                class="font-black text-slate-900 text-xs leading-tight uppercase tracking-tight"
-              >
-                {{ cell.name }}
+            <div
+              v-if="cell"
+              class="flex justify-between items-start animate-in fade-in zoom-in-95"
+            >
+              <div class="flex gap-3">
+                <!-- Gender Indicator -->
+                <div
+                  :class="
+                    cell.gender === 'L'
+                      ? 'bg-blue-50 text-blue-600 border-blue-100'
+                      : 'bg-pink-50 text-pink-600 border-pink-100'
+                  "
+                  class="w-6 h-6 rounded-lg border flex items-center justify-center flex-shrink-0 mt-1"
+                >
+                  <span class="text-[10px] font-black">{{ cell.gender }}</span>
+                </div>
+                <div>
+                  <div
+                    class="font-black text-slate-900 text-sm uppercase leading-tight tracking-tight"
+                  >
+                    {{ cell.name }}
+                  </div>
+                  <div
+                    v-if="cell.spouse"
+                    class="text-[10px] text-emerald-600 italic mt-1 font-bold"
+                  >
+                    + {{ cell.spouse }}
+                  </div>
+                </div>
               </div>
+
+              <!-- Action Buttons (Muncul saat Hover) -->
               <div
-                v-if="cell.spouse"
-                class="text-[10px] text-emerald-600 italic mt-1 font-bold"
+                class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity ml-2"
               >
-                + {{ cell.spouse }}
+                <button
+                  @click="emit('edit', cell)"
+                  class="p-2 hover:bg-emerald-100 text-emerald-600 rounded-lg transition"
+                  title="Edit"
+                >
+                  <Edit2 :size="14" />
+                </button>
+                <button
+                  @click="emit('delete', cell)"
+                  class="p-2 hover:bg-red-100 text-red-600 rounded-lg transition"
+                  title="Hapus"
+                >
+                  <Trash2 :size="14" />
+                </button>
               </div>
             </div>
           </td>

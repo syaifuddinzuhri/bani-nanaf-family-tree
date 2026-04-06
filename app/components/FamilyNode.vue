@@ -9,18 +9,41 @@ defineProps<{ node: FamilyMemberNode }>();
     <div class="relative flex items-center my-4">
       <!-- Box Member (w-48 = 192px) -->
       <div
-        class="w-48 bg-slate-600 text-white p-4 rounded-lg shadow-xl border border-slate-700 z-10 hover:bg-slate-700 transition-colors"
+        :class="[
+          node.gender === 'L' ? 'border-blue-400' : 'border-pink-400',
+          'w-48 bg-white text-slate-900 p-4 rounded-2xl shadow-xl border-2 z-10 transition-all hover:scale-105 group'
+        ]"
       >
         <div
-          class="text-[12px] font-black uppercase border-b border-slate-500 pb-2 mb-2 truncate"
+          class="flex justify-between items-start mb-2 border-b border-slate-100 pb-2"
         >
-          {{ node.name }}
+          <div
+            class="text-[12px] font-black uppercase tracking-tight truncate pr-2"
+          >
+            {{ node.name }}
+          </div>
+
+          <!-- Gender Badge -->
+          <div
+            :class="
+              node.gender === 'L'
+                ? 'bg-blue-50 text-blue-600'
+                : 'bg-pink-50 text-pink-600'
+            "
+            class="text-[9px] font-black w-5 h-5 rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm border border-current opacity-80"
+          >
+            {{ node.gender }}
+          </div>
         </div>
+
         <div
           v-if="node.spouse"
-          class="text-[10px] text-slate-100 italic font-medium truncate"
+          class="text-[11px] text-emerald-600 italic font-bold truncate"
         >
           + {{ node.spouse }}
+        </div>
+        <div v-else class="text-[9px] text-slate-300 font-medium italic">
+          Belum ada pasangan
         </div>
       </div>
 
