@@ -21,9 +21,15 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      title: 'Bani Nanaf | Silsilah Keluarga Digital',
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
       meta: [
-        { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' }
-      ]
+        { name: 'description', content: 'Arsip Digital Silsilah Keluarga Besar Bani Nanaf (Mbah Naimin & Nafsiah).' },
+        { name: 'keywords', content: 'silsilah keluarga, bani nanaf, mbah naimin, nafsiah, nasab keluarga, family tree digital, silsilah bani' },
+        { name: 'theme-color', content: '#10b981' }, 
+        { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
+      ],
     }
-  }
+  },
 })
