@@ -67,9 +67,6 @@ const gridData = computed(() => generateGrid(props.rootNode, props.maxGen));
                   >
                     + {{ cell.spouse }}
                   </div>
-                  <div v-else class="text-[10px] text-gray-400 italic mt-1">
-                    Tidak ada pasangan
-                  </div>
                 </div>
               </div>
 

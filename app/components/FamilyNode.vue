@@ -42,9 +42,6 @@ defineProps<{ node: FamilyMemberNode }>();
         >
           + {{ node.spouse }}
         </div>
-        <div v-else class="text-[9px] text-slate-300 font-medium italic">
-          Tidak ada pasangan
-        </div>
       </div>
 
       <!-- Garis Panah ke Kanan (w-12 = 48px) -->
