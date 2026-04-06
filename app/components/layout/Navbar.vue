@@ -21,16 +21,25 @@ watch(isMenuOpen, (val) => {
       <!-- LOGO & BRAND -->
       <NuxtLink to="/" class="flex items-center gap-3 group" @click="closeMenu">
         <!-- Kotak Logo BN -->
-        <div
+        <!-- <div
           class="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center text-emerald-500 font-black italic transition-transform group-hover:rotate-12 shadow-lg shadow-emerald-500/10"
         >
           BN
+        </div> -->
+        <div
+          class="relative w-11 h-11 flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+        >
+          <img
+            src="/logo-green.webp"
+            alt="Logo Bani Nanaf"
+            class="w-full h-full object-contain filter drop-shadow-sm"
+          />
         </div>
 
         <!-- Nama Brand & Badge -->
         <div class="flex flex-col md:flex-row md:items-center gap-1 md:gap-3">
           <span
-            class="font-black text-slate-900 tracking-tighter uppercase italic leading-none"
+            class="font-black text-emerald-900 tracking-tighter uppercase italic leading-none"
           >
             Bani Nanaf
           </span>
