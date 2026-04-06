@@ -43,7 +43,7 @@ defineProps<{ node: FamilyMemberNode }>();
           + {{ node.spouse }}
         </div>
         <div v-else class="text-[9px] text-slate-300 font-medium italic">
-          Belum ada pasangan
+          Tidak ada pasangan
         </div>
       </div>
 
