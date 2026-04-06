@@ -71,7 +71,7 @@ const select = (id: string) => {
         v-for="root in rootMembers"
         :key="root.id"
         @click="$emit('update:activeTab', root.id)"
-        class="px-6 py-3 border-b-4 font-black uppercase text-xs tracking-widest transition-all"
+        class="px-6 py-3 border-b-4 font-black uppercase text-xs rounded-xl tracking-widest transition-all"
         :class="
           activeTab === root.id
             ? 'border-emerald-500 text-emerald-700 bg-emerald-50'

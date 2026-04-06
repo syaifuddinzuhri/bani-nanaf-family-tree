@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { nextTick } from "vue";
 import type { FamilyMember } from "~/types/family";
 
 const props = defineProps<{
@@ -53,16 +54,22 @@ const siblingOptions = computed(() => {
 // 3. LOGIKA DETEKSI POSISI SAAT BUKA MODAL
 watch(
   () => props.show,
-  (isOpen) => {
+  async (isOpen) => {
     if (isOpen && props.member) {
       isInitializing.value = true;
-
-      form.value = JSON.parse(JSON.stringify(props.member));
       formError.value = "";
 
-      // Cari posisi asli jika sedang Edit
+      // 1. Copy Data ke Form
+      form.value = JSON.parse(JSON.stringify(props.member));
+
+      // 2. Tunggu siklus reaktivitas selesai agar computed & child watcher selesai proses awal
+      await nextTick();
+      // Berikan sedikit delay fisik (optional, untuk UX loading yang mantap)
+      await new Promise((resolve) => setTimeout(resolve, 100));
+
       if (isEdit.value) {
-        const allSiblingsIncludingSelf = props.allMembers
+        // 3. Kalkulasi Ulang Posisi (Ambil data segar dari props langsung agar akurat)
+        const currentSiblings = props.allMembers
           .filter(
             (m) =>
               m.parentId === form.value.parentId &&
@@ -70,24 +77,22 @@ watch(
           )
           .sort((a, b) => a.sortOrder - b.sortOrder);
 
-        const myIndex = allSiblingsIncludingSelf.findIndex(
+        const myIndex = currentSiblings.findIndex(
           (s) => s.id === form.value.id
         );
 
         if (myIndex === 0) {
           afterMemberId.value = "first_child";
         } else if (myIndex > 0) {
-          // FIX: Gunakan konstanta dan optional chaining
-          const prevSibling = allSiblingsIncludingSelf[myIndex - 1];
-          afterMemberId.value = prevSibling?.id || "first_child";
+          afterMemberId.value =
+            currentSiblings[myIndex - 1]?.id || "first_child";
         }
       } else {
         // Mode TAMBAH
         if (siblingOptions.value.length > 0) {
-          // FIX: Gunakan optional chaining pada elemen terakhir
-          const lastChild =
-            siblingOptions.value[siblingOptions.value.length - 1];
-          afterMemberId.value = lastChild?.id || "first_child";
+          afterMemberId.value =
+            siblingOptions.value[siblingOptions.value.length - 1]?.id ||
+            "first_child";
         } else {
           afterMemberId.value = "first_child";
         }
@@ -98,26 +103,40 @@ watch(
   }
 );
 
+watch(() => props.show, (isOpen) => {
+  if (process.client) { // Pastikan hanya berjalan di sisi browser
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }
+});
+
+// Bersihkan efek saat komponen di-unmount (misal pindah halaman)
+onUnmounted(() => {
+  if (process.client) {
+    document.body.style.overflow = '';
+  }
+});
+
 // 4. LOGIKA AUTO-GEN GENERASI & RESET POSISI SAAT GANTI ORANG TUA
 watch(
   () => form.value.parentId,
-  (newParentId) => {
-    if (!props.show) return;
+  (newParentId, oldParentId) => {
+    // PROTEKSI: Jangan jalankan jika sedang inisialisasi atau modal tertutup
+    if (!props.show || isInitializing.value) return;
+
+    // Reset posisi hanya jika user benar-benar mengubah Orang Tua secara manual
+    if (newParentId !== oldParentId) {
+      afterMemberId.value = "first_child";
+    }
 
     if (newParentId) {
       const parent = props.allMembers.find((m) => m.id === newParentId);
       if (parent) form.value.gen = parent.gen + 1;
-
-      const newSiblings = props.allMembers
-        .filter((m) => m.parentId === newParentId)
-        .sort((a, b) => a.sortOrder - b.sortOrder);
-
-      // FIX: Gunakan optional chaining untuk mengambil ID terakhir
-      const lastSibling = newSiblings[newSiblings.length - 1];
-      afterMemberId.value = lastSibling?.id || "first_child";
     } else {
       form.value.gen = 1;
-      afterMemberId.value = "first_child";
     }
   }
 );

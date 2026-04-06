@@ -15,14 +15,14 @@ defineEmits(["edit", "delete"]);
   <div class="relative pt-14">
     <!-- HINT UNIFIKASI: Muncul di Table maupun Chart -->
     <div
-      class="absolute top-0 left-0 md:left-4 z-40 flex items-center gap-3 px-5 py-2.5 bg-slate-900 text-white shadow-xl rounded-2xl border border-slate-700 whitespace-nowrap animate-bounce pointer-events-none origin-left"
+      class="absolute top-0 left-0 md:left-4 z-40 flex items-center gap-3 px-5 py-2.5 bg-slate-900 text-white shadow-xl rounded-2xl border border-slate-700 whitespace-nowrap pointer-events-none origin-left"
     >
       <div
-        class="flex items-center justify-center w-5 h-5 bg-emerald-500 rounded-lg shadow-sm shadow-emerald-500/40"
+        class="flex items-center justify-center w-5 h-5 bg-emerald-500 rounded-lg shadow-sm shadow-emerald-500/40 animate-bounce-x"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="w-3.5 h-3.5 text-slate-900"
+          class="w-3.5 h-3.5 text-slate-900 rotate-180"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -35,8 +35,10 @@ defineEmits(["edit", "delete"]);
           />
         </svg>
       </div>
-      <span class="text-[6px] md:text-[9px] font-black uppercase tracking-[0.2em]">
-        Geser ke kiri untuk melihat lebih banyak
+      <span
+        class="text-[10px] font-black uppercase tracking-[0.2em]"
+      >
+        Geser ke kiri
       </span>
     </div>
 
@@ -92,3 +94,20 @@ defineEmits(["edit", "delete"]);
     </div>
   </div>
 </template>
+
+<style scoped>
+@keyframes bounce-x {
+  0%, 100% {
+    transform: translateX(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateX(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.animate-bounce-x {
+  animation: bounce-x 1s infinite;
+}
+</style>
