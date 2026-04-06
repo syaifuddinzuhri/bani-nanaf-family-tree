@@ -35,7 +35,7 @@ defineEmits(["edit", "delete"]);
           />
         </svg>
       </div>
-      <span class="text-[9px] font-black uppercase tracking-[0.2em]">
+      <span class="text-[6px] md:text-[9px] font-black uppercase tracking-[0.2em]">
         Geser ke kiri untuk melihat lebih banyak
       </span>
     </div>
