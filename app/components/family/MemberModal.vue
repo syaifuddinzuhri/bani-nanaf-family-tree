@@ -118,7 +118,7 @@ const isEdit = computed(() => !!props.member?.id);
           <div class="md:col-span-2">
             <label
               class="block text-xs font-black uppercase text-slate-400 mb-2 ml-1"
-              >Pindah Orang Tua (Satu Bani)</label
+              >Orang Tua (Satu Bani)</label
             >
             <select
               v-model="form.parentId"
