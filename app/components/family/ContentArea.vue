@@ -5,6 +5,7 @@ defineProps<{
   viewType: "chart" | "table";
   treeData: FamilyMemberNode[];
   maxGen: number;
+  isAdmin: boolean;
 }>();
 
 defineEmits(["edit", "delete"]);
@@ -35,9 +36,7 @@ defineEmits(["edit", "delete"]);
           />
         </svg>
       </div>
-      <span
-        class="text-[10px] font-black uppercase tracking-[0.2em]"
-      >
+      <span class="text-[10px] font-black uppercase tracking-[0.2em]">
         Geser ke kiri
       </span>
     </div>
@@ -52,6 +51,7 @@ defineEmits(["edit", "delete"]);
         :key="node.id"
         :rootNode="node"
         :maxGen="maxGen"
+        :isAdmin="isAdmin"
         @edit="(val) => $emit('edit', val)"
         @delete="(val) => $emit('delete', val)"
       />
@@ -97,7 +97,8 @@ defineEmits(["edit", "delete"]);
 
 <style scoped>
 @keyframes bounce-x {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(-25%);
     animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
   }

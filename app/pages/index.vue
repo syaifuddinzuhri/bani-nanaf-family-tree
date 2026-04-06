@@ -2,6 +2,7 @@
 import type { FamilyMember } from "~/types/family";
 
 // Inisialisasi Service
+const { user } = useAuth();
 const { listToTree } = useFamilyData();
 const service = useFamilyService();
 
@@ -242,7 +243,7 @@ const confirmDelete = async () => {
                   :gen="activeMaxGen"
                 />
 
-                <div class="flex justify-end mb-6">
+                <div class="flex justify-end mb-6" v-if="user">
                   <button
                     @click="onAdd"
                     class="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl text-xs font-black uppercase shadow-lg shadow-emerald-200 hover:bg-emerald-700 transition-all active:scale-95"
@@ -269,6 +270,7 @@ const confirmDelete = async () => {
                   :viewType="viewType"
                   :treeData="getTreeData(activeTab)"
                   :maxGen="activeMaxGen"
+                  :isAdmin="!!user" 
                   @edit="onEdit"
                   @delete="onDelete"
                 />

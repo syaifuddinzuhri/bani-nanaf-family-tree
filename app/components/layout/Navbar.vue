@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const isMenuOpen = ref(false);
+const { user, logout } = useAuth();
+const showLoginModal = ref(false);
 
 const closeMenu = () => {
   isMenuOpen.value = false;
@@ -17,7 +19,9 @@ watch(isMenuOpen, (val) => {
   <nav
     class="sticky top-0 z-[100] bg-white/90 backdrop-blur-md border-b border-slate-200"
   >
-    <div class="max-w-full mx-auto px-6 lg:px-20 h-20 flex justify-between items-center">
+    <div
+      class="max-w-full mx-auto px-6 lg:px-20 h-20 flex justify-between items-center"
+    >
       <!-- LOGO & BRAND -->
       <NuxtLink to="/" class="flex items-center gap-3 group" @click="closeMenu">
         <!-- Kotak Logo BN -->
@@ -63,16 +67,33 @@ watch(isMenuOpen, (val) => {
 
       <!-- MENU DESKTOP -->
       <div class="hidden md:flex gap-10 items-center">
-        <NuxtLink to="/" class="nav-link" active-class="nav-link-active"
+        <NuxtLink to="/" class="nav-link" exact-active-class="nav-link-active"
           >Nasab</NuxtLink
         >
+        <!-- Tombol Logout jika user login -->
+        <button
+          v-if="user"
+          @click="logout"
+          class="nav-link !text-red-500 hover:!text-red-700"
+        >
+          Keluar
+        </button>
+
+        <!-- Tombol Login jika belum login -->
+        <button
+          v-else
+          @click="showLoginModal = true"
+          class="px-5 py-2 bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-emerald-600 transition-all"
+        >
+          Login Admin
+        </button>
         <!-- <NuxtLink
           to="/"
           class="nav-link"
-          active-class="nav-link-active"
+             exact-active-class="nav-link-active"
           >Ahli Kubur</NuxtLink
         >
-        <NuxtLink to="/" class="nav-link" active-class="nav-link-active"
+        <NuxtLink to="/" class="nav-link"    exact-active-class="nav-link-active"
           >Galeri</NuxtLink
         > -->
       </div>
@@ -148,9 +169,31 @@ watch(isMenuOpen, (val) => {
         </div>
 
         <div class="flex flex-col p-6 gap-4 bg-slate-50/50 h-full">
-          <NuxtLink to="/" class="mobile-nav-link" @click="closeMenu">
+          <NuxtLink
+            to="/"
+            class="mobile-nav-link"
+            exact-active-class="nav-link-active"
+            @click="closeMenu"
+          >
             <span class="text-xs text-slate-400">01</span> Nasab Keluarga
           </NuxtLink>
+          <!-- Tombol Logout jika user login -->
+          <button
+            v-if="user"
+            @click="logout"
+            class="mobile-nav-link justify-center !text-red-500 hover:!bg-red-200"
+          >
+            Keluar
+          </button>
+
+          <!-- Tombol Login jika belum login -->
+          <button
+            v-else
+            @click="showLoginModal = true"
+            class="px-5 py-2 bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-emerald-600 transition-all"
+          >
+            Login Admin
+          </button>
           <!-- <NuxtLink to="/" class="mobile-nav-link" @click="closeMenu">
             <span class="text-xs text-slate-400">02</span> Ahli Kubur
           </NuxtLink>
@@ -168,6 +211,7 @@ watch(isMenuOpen, (val) => {
       class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[80] md:hidden h-screen w-screen"
     ></div>
   </nav>
+  <AuthLoginModal :show="showLoginModal" @close="showLoginModal = false" />
 </template>
 
 <style scoped>

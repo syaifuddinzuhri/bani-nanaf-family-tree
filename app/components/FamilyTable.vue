@@ -5,6 +5,7 @@ import type { FamilyMember, FamilyMemberNode } from "~/types/family";
 const props = defineProps<{
   rootNode: FamilyMemberNode;
   maxGen: number;
+  isAdmin: boolean;
 }>();
 
 const emit = defineEmits(["edit", "delete"]);
@@ -72,7 +73,7 @@ const gridData = computed(() => generateGrid(props.rootNode, props.maxGen));
 
               <!-- Action Buttons (Muncul saat Hover) -->
               <div
-                v-if="cell.gen !== 1"
+                v-if="cell.gen !== 1 && isAdmin"
                 class="flex gap-1 transition-opacity ml-2"
               >
                 <button
