@@ -242,7 +242,7 @@ const confirmDelete = async () => {
                   :gen="activeMaxGen"
                 />
 
-                <div v-if="viewType === 'table'" class="flex justify-end mb-6">
+                <div class="flex justify-end mb-6">
                   <button
                     @click="onAdd"
                     class="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl text-xs font-black uppercase shadow-lg shadow-emerald-200 hover:bg-emerald-700 transition-all active:scale-95"
