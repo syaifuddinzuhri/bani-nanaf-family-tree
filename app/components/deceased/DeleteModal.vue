@@ -50,8 +50,6 @@ watch(
               >"{{ name }}"</span
             >
             <br />
-            dari daftar ahli kubur.
-            <br />
             <span
               class="text-red-500 font-bold italic text-[10px] uppercase tracking-widest mt-2 block"
             >
@@ -65,7 +63,7 @@ watch(
               @click="emit('confirm')"
               class="w-full py-4 bg-red-600 text-white rounded-2xl text-xs font-black uppercase shadow-lg shadow-red-200 hover:bg-red-700 active:scale-95 transition-all"
             >
-              Ya, Hapus Nama
+              Ya, Hapus
             </button>
             <button
               @click="emit('close')"

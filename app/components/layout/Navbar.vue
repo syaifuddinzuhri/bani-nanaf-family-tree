@@ -76,6 +76,12 @@ watch(isMenuOpen, (val) => {
           exact-active-class="nav-link-active"
           >Ahli Kubur</NuxtLink
         >
+        <NuxtLink
+          to="/agenda"
+          class="nav-link"
+          exact-active-class="nav-link-active"
+          >Agenda</NuxtLink
+        >
         <!-- Tombol Logout jika user login -->
         <button
           v-if="user"
@@ -176,6 +182,9 @@ watch(isMenuOpen, (val) => {
           </NuxtLink>
           <NuxtLink to="/ahli-kubur" class="mobile-nav-link" @click="closeMenu">
             <span class="text-xs text-slate-400">02</span> Ahli Kubur
+          </NuxtLink>
+          <NuxtLink to="/agenda" class="mobile-nav-link" @click="closeMenu">
+            <span class="text-xs text-slate-400">03</span> Agenda
           </NuxtLink>
           <!-- Tombol Logout jika user login -->
           <button
