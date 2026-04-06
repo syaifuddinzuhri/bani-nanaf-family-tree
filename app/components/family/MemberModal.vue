@@ -54,11 +54,11 @@ const isEdit = computed(() => !!props.member?.id);
     >
       <div class="p-10">
         <div class="flex justify-between items-center mb-8 border-b pb-6">
-          <h3 class="text-2xl font-black text-slate-900 uppercase italic">
+          <h3 class="text-xl font-black text-slate-900 uppercase italic">
             {{ isEdit ? "Ubah Data" : "Tambah Anggota Baru" }}
           </h3>
           <span
-            class="px-4 py-1 bg-slate-100 rounded-full text-[10px] font-black text-slate-400 tracking-widest uppercase"
+            class="px-4 py-1 bg-slate-100 rounded-full text-base font-black text-slate-400 tracking-widest uppercase"
             >ID: {{ form.id }}</span
           >
         </div>
@@ -66,24 +66,24 @@ const isEdit = computed(() => !!props.member?.id);
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="md:col-span-2">
             <label
-              class="block text-[10px] font-black uppercase text-slate-400 mb-2 ml-1"
+              class="block text-xs font-black uppercase text-slate-400 mb-2 ml-1"
               >Nama Lengkap</label
             >
             <input
               v-model="form.name"
               type="text"
-              class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 text-sm font-bold focus:border-emerald-500 outline-none transition-all"
+              class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 text-base font-bold focus:border-emerald-500 outline-none transition-all"
             />
           </div>
 
           <div>
             <label
-              class="block text-[10px] font-black uppercase text-slate-400 mb-2 ml-1"
+              class="block text-xs font-black uppercase text-slate-400 mb-2 ml-1"
               >Jenis Kelamin</label
             >
             <select
               v-model="form.gender"
-              class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 text-sm font-bold outline-none"
+              class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 text-base font-bold outline-none"
             >
               <option value="L">Laki-laki</option>
               <option value="P">Perempuan</option>
@@ -92,37 +92,37 @@ const isEdit = computed(() => !!props.member?.id);
 
           <div>
             <label
-              class="block text-[10px] font-black uppercase text-slate-400 mb-2 ml-1"
+              class="block text-xs font-black uppercase text-slate-400 mb-2 ml-1"
               >Generasi (Auto)</label
             >
             <input
               :value="form.gen"
               disabled
-              class="w-full bg-slate-100 border-2 border-slate-100 rounded-2xl p-4 text-sm font-bold text-slate-400 cursor-not-allowed"
+              class="w-full bg-slate-100 border-2 border-slate-100 rounded-2xl p-4 text-base font-bold text-slate-400 cursor-not-allowed"
             />
           </div>
 
           <div class="md:col-span-2">
             <label
-              class="block text-[10px] font-black uppercase text-slate-400 mb-2 ml-1"
+              class="block text-xs font-black uppercase text-slate-400 mb-2 ml-1"
               >Pasangan (+)</label
             >
             <input
               v-model="form.spouse"
               type="text"
               placeholder="Kosongkan jika tidak ada"
-              class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 text-sm font-bold outline-none"
+              class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 text-base font-bold outline-none"
             />
           </div>
 
           <div class="md:col-span-2">
             <label
-              class="block text-[10px] font-black uppercase text-slate-400 mb-2 ml-1"
+              class="block text-xs font-black uppercase text-slate-400 mb-2 ml-1"
               >Pindah Orang Tua (Satu Bani)</label
             >
             <select
               v-model="form.parentId"
-              class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 text-sm font-bold outline-none"
+              class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 text-base font-bold outline-none"
             >
               <option :value="null">-- Pilih Orang Tua --</option>
               <option v-for="p in parentOptions" :key="p.id" :value="p.id">
