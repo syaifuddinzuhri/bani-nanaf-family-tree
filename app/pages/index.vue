@@ -9,12 +9,18 @@ const service = useFamilyService();
 const { exportToImage } = useExport();
 
 const handleExport = async () => {
-  const mode = viewType.value; // 'chart' atau 'table'
-  const baniName = activeRootData.value?.name || "Silsilah";
-  const elementId =
-    mode === "chart" ? "export-area-chart" : "export-area-table";
+  const baniName = activeRootData.value?.name || "Keluarga";
+  const mode = viewType.value === "chart" ? "Bagan" : "Tabel";
 
-  await exportToImage(elementId, `Silsilah-${baniName}-${mode}`);
+  // Memulai proses export
+  isProcessing.value = true;
+
+  try {
+    // Kita targetkan ID 'capture-area' yang membungkus header + konten
+    await exportToImage("capture-area", `Silsilah-${baniName}-${mode}`);
+  } finally {
+    isProcessing.value = false;
+  }
 };
 
 // State Utama
@@ -239,7 +245,7 @@ const confirmDelete = async () => {
             <FamilyViewToggle v-model="viewType" />
 
             <!-- TOMBOL EXPORT -->
-            <button
+            <!-- <button
               @click="handleExport"
               class="flex items-center gap-2 px-6 py-2.5 bg-white border-2 border-slate-200 text-slate-600 rounded-xl text-xs font-black uppercase shadow-sm hover:border-emerald-500 hover:text-emerald-600 transition-all active:scale-95"
             >
@@ -258,7 +264,7 @@ const confirmDelete = async () => {
                 />
               </svg>
               Simpan Gambar
-            </button>
+            </button> -->
           </div>
 
           <FamilyBaniSelector
@@ -274,11 +280,11 @@ const confirmDelete = async () => {
               class="bg-white rounded-[3.5rem] shadow-2xl shadow-slate-200/60 border border-slate-200 overflow-hidden mb-20"
             >
               <div class="p-6 md:p-14">
-                <FamilyStatsCard
+                <!-- <FamilyStatsCard
                   :name="activeRootData.name"
                   :count="getFamilyData(activeTab).length"
                   :gen="activeMaxGen"
-                />
+                /> -->
 
                 <div class="flex justify-end mb-6" v-if="user">
                   <button
@@ -307,7 +313,9 @@ const confirmDelete = async () => {
                   :viewType="viewType"
                   :treeData="getTreeData(activeTab)"
                   :maxGen="activeMaxGen"
+                  :count="getFamilyData(activeTab).length"
                   :isAdmin="!!user"
+                  :activeBaniName="activeRootData?.name"
                   @edit="onEdit"
                   @delete="onDelete"
                 />

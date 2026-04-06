@@ -8,7 +8,7 @@
         <p
           class="text-slate-400 text-[10px] font-black uppercase tracking-[0.5em]"
         >
-          &copy; 2026 Digital Family Archives • Bani Nanaf
+          &copy; 2026 Dokumen Digital Bani Nanaf
         </p>
         <p
           class="text-slate-300 text-[9px] leading-relaxed uppercase font-bold tracking-widest"

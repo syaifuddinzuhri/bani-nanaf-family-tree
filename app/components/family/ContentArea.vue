@@ -5,115 +5,164 @@ defineProps<{
   viewType: "chart" | "table";
   treeData: FamilyMemberNode[];
   maxGen: number;
+  count: number;
   isAdmin: boolean;
+  activeBaniName?: string; // Tambahkan prop ini
 }>();
 
 defineEmits(["edit", "delete"]);
+
+// Mendapatkan tanggal hari ini untuk info di gambar
+const currentDate = new Date().toLocaleDateString("id-ID", {
+  year: "numeric",
+  month: "long",
+  day: "numeric"
+});
 </script>
 
 <template>
-  <!-- Wrapper Utama dengan Padding Top untuk Hint -->
-  <div class="relative pt-14">
-    <!-- HINT UNIFIKASI: Muncul di Table maupun Chart -->
+  <!-- ID Wrapper Utama untuk Export -->
+  <div
+    id="capture-area"
+    class="bg-[#F8FAFC] rounded-[3rem] overflow-hidden border border-slate-200 shadow-sm"
+  >
     <div
-      class="absolute top-0 left-0 md:left-4 z-40 flex items-center gap-3 px-5 py-2.5 bg-slate-900 text-white shadow-xl rounded-2xl border border-slate-700 whitespace-nowrap pointer-events-none origin-left"
+      id="export-header"
+      class="p-4 md:p-14 bg-white border-b-8 border-emerald-500 flex flex-col lg:flex-row justify-between items-center gap-10"
     >
-      <div
-        class="flex items-center justify-center w-5 h-5 bg-emerald-500 rounded-lg shadow-sm shadow-emerald-500/40 animate-bounce-x"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-3.5 h-3.5 text-slate-900 rotate-180"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="4"
+      <!-- Sisi Kiri: Judul & Identitas -->
+      <div class="text-center lg:text-left space-y-4">
+        <div
+          class="flex items-center justify-center lg:justify-start gap-4 mb-2"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M17 8l4 4m0 0l-4 4m4-4H3"
+          <img
+            src="/logo-green.webp"
+            alt="Logo"
+            class="w-12 h-12 object-contain"
           />
-        </svg>
+          <div class="h-8 w-px bg-slate-200 hidden lg:block"></div>
+          <p
+            class="text-emerald-600 font-black uppercase text-[10px] tracking-[0.5em]"
+          >
+            Dokumen Digital Bani Nanaf
+          </p>
+        </div>
+
+        <h2
+          class="text-3xl md:text-5xl font-black text-slate-900 uppercase italic leading-none tracking-tighter"
+        >
+          Silsilah Keluarga <br> {{ activeBaniName }}
+        </h2>
+
+        <div
+          class="flex items-center justify-center lg:justify-start gap-3 text-slate-400 font-bold text-[8px] md:text-[10px] uppercase tracking-widest"
+        >
+          <span>Keluarga Besar Bani Nanaf</span>
+          <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+          <span>Update: {{ currentDate }}</span>
+        </div>
       </div>
-      <span class="text-[10px] font-black uppercase tracking-[0.2em]">
-        Geser ke kiri
-      </span>
-    </div>
 
-    <!-- RENDER TABLE -->
-    <div
-      v-if="viewType === 'table'"
-      id="export-area-table"
-      class="animate-in zoom-in-95 duration-500 pb-10"
-    >
-      <FamilyTable
-        v-for="node in treeData"
-        :key="node.id"
-        :rootNode="node"
-        :maxGen="maxGen"
-        :isAdmin="isAdmin"
-        @edit="(val) => $emit('edit', val)"
-        @delete="(val) => $emit('delete', val)"
-      />
-    </div>
-
-    <!-- RENDER CHART -->
-    <div
-      v-else
-      id="export-area-chart"
-      class="animate-in slide-in-from-right-8 duration-500 relative"
-    >
-      <!-- Container Scroll Chart -->
+      <!-- Sisi Kanan: Statistik Ringkas -->
       <div
-        class="overflow-x-auto pb-12 custom-scrollbar rounded-[2.5rem] bg-slate-50 border border-slate-200 shadow-inner"
+        class="flex items-center gap-10 bg-slate-50 px-10 py-4 rounded-[2.5rem] border border-slate-100 shadow-inner w-full lg:w-auto justify-center lg:justify-start"
       >
-        <div class="min-w-max p-8 md:p-12">
-          <!-- Header Generasi Chart -->
-          <div class="flex mb-14 border-b-2 border-slate-200 pb-8 ml-4">
-            <div
-              v-for="n in maxGen"
-              :key="n"
-              class="w-[280px] flex-shrink-0 relative group"
-            >
-              <div class="pl-6 border-l-4 border-emerald-500">
-                <span
-                  class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]"
-                  >Generasi</span
-                >
-                <div
-                  class="text-5xl font-black text-slate-400 group-hover:text-emerald-500 transition-colors tracking-tighter"
-                >
-                  0{{ n }}
-                </div>
-              </div>
-            </div>
+        <div class="text-center">
+          <div class="text-3xl font-black text-emerald-600 leading-none">
+            {{ count }}
           </div>
-
-          <!-- Bagan Silsilah -->
-          <div class="flex flex-col ml-4">
-            <FamilyNode v-for="node in treeData" :key="node.id" :node="node" />
+          <div
+            class="text-[9px] font-black uppercase text-slate-400 tracking-[0.2em] mt-2"
+          >
+            Anggota
+          </div>
+        </div>
+        <div class="h-10 w-px bg-slate-200"></div>
+        <div class="text-center">
+          <div class="text-3xl font-black text-emerald-600 leading-none">
+            {{ maxGen }}
+          </div>
+          <div
+            class="text-[9px] font-black uppercase text-slate-400 tracking-[0.2em] mt-2"
+          >
+            Generasi
           </div>
         </div>
       </div>
     </div>
+
+    <div class="relative pt-6 p-4 md:p-10">
+      <!-- HINT (Akan ikut terfoto, tapi kita bisa sembunyikan jika mau) -->
+      <!-- Jika ingin hint hilang di gambar, tambahkan class 'data-html2canvas-ignore' -->
+
+      <!-- RENDER TABLE -->
+      <div
+        v-if="viewType === 'table'"
+        class="animate-in zoom-in-95 duration-500 pb-10"
+      >
+        <FamilyTable
+          v-for="node in treeData"
+          :key="node.id"
+          :rootNode="node"
+          :maxGen="maxGen"
+          :isAdmin="isAdmin"
+          @edit="(val) => $emit('edit', val)"
+          @delete="(val) => $emit('delete', val)"
+        />
+      </div>
+
+      <!-- RENDER CHART -->
+      <div
+        v-else
+        class="animate-in slide-in-from-right-8 duration-500 relative"
+      >
+        <div class="overflow-x-auto custom-scrollbar pb-12 rounded-[2.5rem]">
+          <div class="min-w-max p-4 md:p-8">
+            <!-- Header Generasi -->
+            <div class="flex mb-14 border-b-2 border-slate-200 pb-8 ml-4">
+              <div
+                v-for="n in maxGen"
+                :key="n"
+                class="w-[280px] flex-shrink-0 relative"
+              >
+                <div class="pl-6 border-l-4 border-emerald-500">
+                  <span
+                    class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]"
+                    >Generasi</span
+                  >
+                  <div class="text-5xl font-black text-slate-200">0{{ n }}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col ml-4">
+              <FamilyNode
+                v-for="node in treeData"
+                :key="node.id"
+                :node="node"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Khusus Gambar -->
+    <div
+      class="px-6 py-8 md:px-14 md:py-6 bg-slate-50 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] font-black uppercase text-slate-300 tracking-[0.2em] md:tracking-[0.3em]"
+    >
+      <!-- Sisi Kiri / Atas (Mobile) -->
+      <div class="flex items-center gap-2 text-center md:text-left">
+        <div class="w-1 h-1 bg-emerald-300 rounded-full hidden md:block"></div>
+        <span>Generated by Dokumen Digital Bani Nanaf</span>
+      </div>
+
+      <!-- Sisi Kanan / Bawah (Mobile) -->
+      <span
+        class="text-slate-400/60 lowercase tracking-normal md:uppercase md:tracking-[0.3em]"
+      >
+        baninanaf.syaifuddinzuhri.my.id
+      </span>
+    </div>
   </div>
 </template>
-
-<style scoped>
-@keyframes bounce-x {
-  0%,
-  100% {
-    transform: translateX(-25%);
-    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-  }
-  50% {
-    transform: translateX(0);
-    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  }
-}
-
-.animate-bounce-x {
-  animation: bounce-x 1s infinite;
-}
-</style>
