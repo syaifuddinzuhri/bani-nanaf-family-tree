@@ -17,7 +17,7 @@ watch(isMenuOpen, (val) => {
   <nav
     class="sticky top-0 z-[100] bg-white/90 backdrop-blur-md border-b border-slate-200"
   >
-    <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+    <div class="max-w-full mx-auto px-6 lg:px-20 h-20 flex justify-between items-center">
       <!-- LOGO & BRAND -->
       <NuxtLink to="/" class="flex items-center gap-3 group" @click="closeMenu">
         <!-- Kotak Logo BN -->
