@@ -34,6 +34,20 @@ const memberToDelete = ref<FamilyMember | null>(null);
 const showEditModal = ref(false);
 const selectedMember = ref<FamilyMember | null>(null);
 
+const onAdd = () => {
+  // Inisialisasi data kosong untuk anggota baru
+  selectedMember.value = {
+    id: "", // Kosong karena akan di-generate saat simpan
+    name: "",
+    gender: "L",
+    spouse: "",
+    parentId: null,
+    rootId: activeTab.value, // Otomatis masuk ke Bani yang sedang dibuka
+    gen: 1
+  };
+  showEditModal.value = true;
+};
+
 // Handler Edit
 const onEdit = (member: FamilyMember) => {
   selectedMember.value = member;
@@ -47,11 +61,18 @@ const onDelete = (member: FamilyMember) => {
 };
 
 // Handler Simpan
-const onSave = (updatedData: FamilyMember) => {
-  // Update di Firebase (atau rawData.value untuk dummy)
-  const index = rawData.value.findIndex((m) => m.id === updatedData.id);
-  if (index !== -1) {
-    rawData.value[index] = updatedData;
+const onSave = (formData: FamilyMember) => {
+  if (formData.id) {
+    // MODE EDIT
+    const index = rawData.value.findIndex((m) => m.id === formData.id);
+    if (index !== -1) rawData.value[index] = formData;
+  } else {
+    // MODE TAMBAH
+    const newMember = {
+      ...formData,
+      id: `new-${Date.now()}` // Generate ID unik sementara
+    };
+    rawData.value.push(newMember);
   }
   showEditModal.value = false;
 };
@@ -113,6 +134,29 @@ const confirmDelete = () => {
               :count="getFamilyData(activeTab).length"
               :gen="activeMaxGen"
             />
+
+            <div v-if="viewType === 'table'" class="flex justify-end mb-6">
+              <button
+                @click="onAdd"
+                class="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl text-xs font-black uppercase shadow-lg shadow-emerald-200 hover:bg-emerald-700 hover:scale-105 active:scale-95 transition-all"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="3"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 4v16m8-8H4"
+                  />
+                </svg>
+                Tambah Anggota
+              </button>
+            </div>
 
             <FamilyContentArea
               :viewType="viewType"

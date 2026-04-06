@@ -41,7 +41,7 @@ const gridData = computed(() => generateGrid(props.rootNode, props.maxGen));
           >
             <div
               v-if="cell"
-              class="flex justify-between items-start animate-in fade-in zoom-in-95"
+              class="flex justify-between items-center animate-in fade-in zoom-in-95"
             >
               <div class="flex gap-3">
                 <!-- Gender Indicator -->
@@ -51,7 +51,7 @@ const gridData = computed(() => generateGrid(props.rootNode, props.maxGen));
                       ? 'bg-blue-50 text-blue-600 border-blue-100'
                       : 'bg-pink-50 text-pink-600 border-pink-100'
                   "
-                  class="w-6 h-6 rounded-lg border flex items-center justify-center flex-shrink-0 mt-1"
+                  class="w-6 h-6 rounded-lg border flex items-center justify-center flex-shrink-0"
                 >
                   <span class="text-[10px] font-black">{{ cell.gender }}</span>
                 </div>
@@ -66,6 +66,9 @@ const gridData = computed(() => generateGrid(props.rootNode, props.maxGen));
                     class="text-[10px] text-emerald-600 italic mt-1 font-bold"
                   >
                     + {{ cell.spouse }}
+                  </div>
+                  <div v-else class="text-[10px] text-gray-400 italic mt-1">
+                    Belum ada pasangan
                   </div>
                 </div>
               </div>

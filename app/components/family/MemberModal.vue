@@ -40,6 +40,8 @@ watch(
     }
   }
 );
+
+const isEdit = computed(() => !!props.member?.id);
 </script>
 
 <template>
@@ -53,7 +55,7 @@ watch(
       <div class="p-10">
         <div class="flex justify-between items-center mb-8 border-b pb-6">
           <h3 class="text-2xl font-black text-slate-900 uppercase italic">
-            Edit Anggota
+            {{ isEdit ? "Ubah Data" : "Tambah Anggota Baru" }}
           </h3>
           <span
             class="px-4 py-1 bg-slate-100 rounded-full text-[10px] font-black text-slate-400 tracking-widest uppercase"
@@ -122,7 +124,7 @@ watch(
               v-model="form.parentId"
               class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 text-sm font-bold outline-none"
             >
-              <option :value="null">-- Sebagai Leluhur Utama --</option>
+              <option :value="null">-- Pilih Orang Tua --</option>
               <option v-for="p in parentOptions" :key="p.id" :value="p.id">
                 Gen {{ p.gen }} - {{ p.name }}
               </option>
@@ -141,7 +143,7 @@ watch(
             @click="emit('save', form)"
             class="flex-[2] py-4 bg-slate-900 text-emerald-400 rounded-2xl text-xs font-black uppercase shadow-xl hover:scale-[1.02] active:scale-95 transition-all"
           >
-            Simpan Perubahan
+            {{ isEdit ? "Simpan Perubahan" : "Tambahkan Anggota" }}
           </button>
         </div>
       </div>
