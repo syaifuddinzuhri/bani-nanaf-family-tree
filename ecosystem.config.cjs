@@ -5,7 +5,7 @@ module.exports = {
       port: "5000",
       exec_mode: "fork", // Karena VPS 1 Core, pakai mode fork saja
       instances: "1",
-      script: "./output/server/index.mjs",
+      script: "./.output/server/index.mjs",
       env: {
         NODE_ENV: "production",
         NITRO_PORT: "5000", // Port Nuxt (Nitro)
