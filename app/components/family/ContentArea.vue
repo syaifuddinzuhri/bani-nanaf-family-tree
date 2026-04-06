@@ -75,7 +75,7 @@ defineEmits(["edit", "delete"]);
                   >Generasi</span
                 >
                 <div
-                  class="text-5xl font-black text-slate-200 group-hover:text-emerald-200 transition-colors tracking-tighter"
+                  class="text-5xl font-black text-slate-400 group-hover:text-emerald-500 transition-colors tracking-tighter"
                 >
                   0{{ n }}
                 </div>
