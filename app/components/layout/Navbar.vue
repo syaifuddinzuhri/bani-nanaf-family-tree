@@ -20,15 +20,36 @@ watch(isMenuOpen, (val) => {
     <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
       <!-- LOGO & BRAND -->
       <NuxtLink to="/" class="flex items-center gap-3 group" @click="closeMenu">
+        <!-- Kotak Logo BN -->
         <div
-          class="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center text-emerald-500 font-black italic transition-transform group-hover:rotate-12"
+          class="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center text-emerald-500 font-black italic transition-transform group-hover:rotate-12 shadow-lg shadow-emerald-500/10"
         >
           BN
         </div>
-        <span
-          class="font-black text-slate-900 tracking-tighter uppercase italic"
-          >Bani Nanaf</span
-        >
+
+        <!-- Nama Brand & Badge -->
+        <div class="flex flex-col md:flex-row md:items-center gap-1 md:gap-3">
+          <span
+            class="font-black text-slate-900 tracking-tighter uppercase italic leading-none"
+          >
+            Bani Nanaf
+          </span>
+
+          <!-- Badge Belum Final -->
+          <span
+            class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-amber-600"
+          >
+            <!-- Dot Animasi Pulse -->
+            <span
+              class="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"
+            ></span>
+            <span
+              class="text-[9px] font-black uppercase tracking-widest leading-none"
+            >
+              Masih Dalam Proses Penyempurnaan
+            </span>
+          </span>
+        </div>
       </NuxtLink>
 
       <!-- MENU DESKTOP -->
