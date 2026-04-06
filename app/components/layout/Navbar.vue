@@ -46,7 +46,7 @@ watch(isMenuOpen, (val) => {
             <span
               class="text-[9px] font-black uppercase tracking-widest leading-none"
             >
-              Masih Dalam Proses Penyempurnaan
+              Data Masih Belum FIX
             </span>
           </span>
         </div>
