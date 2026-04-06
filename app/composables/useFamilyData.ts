@@ -1,0 +1,111 @@
+import type { FamilyMember, FamilyMemberNode } from '~/types/family'
+
+export const useFamilyData = () => {
+    const generateData = (): FamilyMember[] => {
+        const data: FamilyMember[] = [
+            // ==========================================
+            // ROOT 1: MBOK SITIN
+            // ==========================================
+            { id: 'r1', name: 'Mbok Sitin', spouse: 'Saluwi', parentId: null, gen: 1, rootId: 'r1' },
+            // Anak Mbok Sitin
+            { id: 'r1-a', name: 'Ratno', spouse: 'Rumani', parentId: 'r1', gen: 2, rootId: 'r1' },
+            { id: 'r1-b', name: 'Atima', spouse: 'Dayat', parentId: 'r1', gen: 2, rootId: 'r1' },
+            { id: 'r1-c', name: 'Kusnan', spouse: 'Umiyah', parentId: 'r1', gen: 2, rootId: 'r1' },
+            { id: 'r1-d', name: 'Karsono', spouse: 'Sumarli', parentId: 'r1', gen: 2, rootId: 'r1' },
+            // Cucu (Anak Ratno)
+            { id: 'r1-a1', name: 'Aminah', spouse: 'Mat Ali', parentId: 'r1-a', gen: 3, rootId: 'r1' },
+            { id: 'r1-a2', name: 'Karliyah', spouse: 'Punawi', parentId: 'r1-a', gen: 3, rootId: 'r1' },
+            { id: 'r1-a3', name: 'Ti', spouse: 'Shoheh', parentId: 'r1-a', gen: 3, rootId: 'r1' },
+            // Cucu (Anak Atima)
+            { id: 'r1-b1', name: 'Jidah', spouse: 'Ali', parentId: 'r1-b', gen: 3, rootId: 'r1' },
+            { id: 'r1-b2', name: 'Carni', spouse: null, parentId: 'r1-b', gen: 3, rootId: 'r1' },
+            { id: 'r1-b3', name: 'Sudarmi', spouse: 'Lasidi', parentId: 'r1-b', gen: 3, rootId: 'r1' },
+            // Cucu (Anak Kusnan)
+            { id: 'r1-c1', name: 'Muslimin', spouse: 'Mulyati', parentId: 'r1-c', gen: 3, rootId: 'r1' },
+            { id: 'r1-c2', name: 'Zubaidah', spouse: 'Supri', parentId: 'r1-c', gen: 3, rootId: 'r1' },
+            { id: 'r1-c3', name: 'Agus', spouse: 'Mahmudah', parentId: 'r1-c', gen: 3, rootId: 'r1' },
+
+            // ==========================================
+            // ROOT 2: SARIM
+            // ==========================================
+            { id: 'r2', name: 'Sarim', spouse: 'Mantra', parentId: null, gen: 1, rootId: 'r2' },
+            { id: 'r2-a', name: 'Lipah', spouse: 'Samudi', parentId: 'r2', gen: 2, rootId: 'r2' },
+            { id: 'r2-b', name: 'Darsono', spouse: null, parentId: 'r2', gen: 2, rootId: 'r2' },
+            { id: 'r2-c', name: 'Salimah', spouse: 'Mukhtadi', parentId: 'r2', gen: 2, rootId: 'r2' },
+            // Cucu (Anak Lipah)
+            { id: 'r2-a1', name: 'Hj. Lilik', spouse: 'H. Yazid', parentId: 'r2-a', gen: 3, rootId: 'r2' },
+            { id: 'r2-a2', name: 'Edi S.', spouse: 'Malikhah', parentId: 'r2-a', gen: 3, rootId: 'r2' },
+            { id: 'r2-a3', name: 'Srinanik', spouse: 'Qosim', parentId: 'r2-a', gen: 3, rootId: 'r2' },
+
+            // ==========================================
+            // ROOT 3: LASEMUN
+            // ==========================================
+            { id: 'r3', name: 'Lasemun', spouse: 'Mak Sup', parentId: null, gen: 1, rootId: 'r3' },
+            { id: 'r3-a', name: 'Ali Maksum', spouse: null, parentId: 'r3', gen: 2, rootId: 'r3' },
+            { id: 'r3-b', name: 'Khuzaimi', spouse: 'Tiara', parentId: 'r3', gen: 2, rootId: 'r3' },
+            { id: 'r3-c', name: 'Khodijah', spouse: null, parentId: 'r3', gen: 2, rootId: 'r3' },
+            { id: 'r3-d', name: 'Habibah', spouse: 'Rasuki', parentId: 'r3', gen: 2, rootId: 'r3' },
+            // Cucu (Anak Ali Maksum)
+            { id: 'r3-a1', name: 'Ulfa', spouse: 'Sarifuddin', parentId: 'r3-a', gen: 3, rootId: 'r3' },
+            { id: 'r3-a2', name: 'Nining', spouse: null, parentId: 'r3-a', gen: 3, rootId: 'r3' },
+
+            // ==========================================
+            // ROOT 4: NASIAH
+            // ==========================================
+            { id: 'r4', name: 'Nasiah', spouse: 'Kalil', parentId: null, gen: 1, rootId: 'r4' },
+            { id: 'r4-a', name: 'Duriyati', spouse: 'Muslikh', parentId: 'r4', gen: 2, rootId: 'r4' },
+            { id: 'r4-b', name: 'Paini', spouse: 'Aruman', parentId: 'r4', gen: 2, rootId: 'r4' },
+            { id: 'r4-c', name: 'M. Ilyas', spouse: 'Kholis', parentId: 'r4', gen: 2, rootId: 'r4' },
+            // Cucu (Anak Duriyati)
+            { id: 'r4-a1', name: 'Nurul', spouse: 'Supardi', parentId: 'r4-a', gen: 3, rootId: 'r4' },
+            { id: 'r4-a2', name: 'Fatkhiyah', spouse: 'Junaidi', parentId: 'r4-a', gen: 3, rootId: 'r4' },
+
+            // --- BARU: Cicit (Anak Fatkhiyah) ---
+            { id: 'r4-a2-1', name: 'Zidan', spouse: null, parentId: 'r4-a2', gen: 4, rootId: 'r4' },
+            { id: 'r4-a2-2', name: 'Aisyah', spouse: null, parentId: 'r4-a2', gen: 4, rootId: 'r4' },
+            // Cucu (Anak Ilyas)
+            { id: 'r4-c1', name: 'Lia', spouse: 'Mahmud', parentId: 'r4-c', gen: 3, rootId: 'r4' },
+
+            // ==========================================
+            // ROOT 5: MISTAR (Dengan Supeni)
+            // ==========================================
+            { id: 'r5', name: 'Mistar', spouse: 'Supeni', parentId: null, gen: 1, rootId: 'r5' },
+            { id: 'r5-a', name: 'Siyama', spouse: 'Lasidi', parentId: 'r5', gen: 2, rootId: 'r5' },
+            { id: 'r5-b', name: 'Rumana', spouse: 'Mulyadi', parentId: 'r5', gen: 2, rootId: 'r5' },
+            { id: 'r5-c', name: 'Ponadi', spouse: 'Sri', parentId: 'r5', gen: 2, rootId: 'r5' },
+            { id: 'r5-d', name: 'Widianto', spouse: 'Sulis', parentId: 'r5', gen: 2, rootId: 'r5' },
+            { id: 'r5-e', name: 'Isnawati', spouse: 'Wawan', parentId: 'r5', gen: 2, rootId: 'r5' },
+            // Cucu (Anak Siyama)
+            { id: 'r5-a1', name: 'Slamet', spouse: 'Neni', parentId: 'r5-a', gen: 3, rootId: 'r5' },
+            { id: 'r5-a2', name: 'Henik', spouse: 'Dedik', parentId: 'r5-a', gen: 3, rootId: 'r5' },
+            // Cucu (Anak Ponadi)
+            { id: 'r5-c1', name: 'Hendro', spouse: 'Firoh', parentId: 'r5-c', gen: 3, rootId: 'r5' },
+            { id: 'r5-c2', name: 'Kiki', spouse: null, parentId: 'r5-c', gen: 3, rootId: 'r5' },
+
+            // ==========================================
+            // ROOT 6: MISTAR (Dengan Ginayah)
+            // ==========================================
+            { id: 'r6', name: 'Mistar ', spouse: 'Ginayah', parentId: null, gen: 1, rootId: 'r6' },
+            { id: 'r6-a', name: 'Nurida', spouse: 'Tani', parentId: 'r6', gen: 2, rootId: 'r6' },
+            { id: 'r6-b', name: 'Hj. Kusmiati', spouse: null, parentId: 'r6', gen: 2, rootId: 'r6' },
+            { id: 'r6-c', name: 'Supriyadi', spouse: 'Tanti', parentId: 'r6', gen: 2, rootId: 'r6' },
+            { id: 'r6-d', name: 'Bashori', spouse: 'Tukini', parentId: 'r6', gen: 2, rootId: 'r6' },
+            // Cucu (Anak Nurida)
+            { id: 'r6-a1', name: 'Puji', spouse: 'Dul', parentId: 'r6-a', gen: 3, rootId: 'r6' },
+            { id: 'r6-a2', name: 'Udin', spouse: null, parentId: 'r6-a', gen: 3, rootId: 'r6' },
+            { id: 'r6-a3', name: 'Saiful', spouse: null, parentId: 'r6-a', gen: 3, rootId: 'r6' },
+        ]
+        return data
+    }
+
+    const listToTree = (list: FamilyMember[], parentId: string | null = null): FamilyMemberNode[] => {
+        return list
+            .filter((item) => item.parentId === parentId)
+            .map((item) => ({
+                ...item,
+                children: listToTree(list, item.id),
+            }))
+    }
+
+    return { generateData, listToTree }
+}
