@@ -10,10 +10,10 @@
     </p>
 
     <!-- JUDUL UTAMA -->
-    <div class="relative inline-block group pt-8 pb-4 px-8">
+    <div class="relative inline-block group">
       <!-- Kita gunakan satu class khusus 'hero-title' untuk menggabung animasi -->
       <h1
-        class="hero-title text-6xl md:text-[120px] font-black tracking-tighter uppercase leading-normal py-4 px-2 
+        class="hero-title text-5xl md:text-[120px] font-black tracking-tighter uppercase leading-normal py-4 px-2 
                bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-emerald-500 via-emerald-400 via-emerald-500 to-slate-900 
                bg-[length:200%_auto] cursor-default"
       >
