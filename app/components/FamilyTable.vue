@@ -75,7 +75,7 @@ const gridData = computed(() => generateGrid(props.rootNode, props.maxGen));
 
               <!-- Action Buttons (Muncul saat Hover) -->
               <div
-                class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity ml-2"
+                class="flex gap-1 transition-opacity ml-2"
               >
                 <button
                   @click="emit('edit', cell)"
