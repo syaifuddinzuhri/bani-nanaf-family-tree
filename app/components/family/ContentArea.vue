@@ -25,7 +25,7 @@ defineProps<{
       <div
         class="overflow-x-auto pb-12 custom-scrollbar rounded-[2.5rem] bg-slate-50 border border-slate-200 shadow-inner"
       >
-        <div class="min-w-max p-12">
+        <div class="min-w-max p-8">
           <!-- Header Generasi Chart -->
           <div class="flex mb-14 border-b-2 border-slate-200 pb-8 ml-4">
             <div

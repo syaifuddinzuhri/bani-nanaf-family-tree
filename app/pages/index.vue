@@ -52,7 +52,7 @@ const getTreeData = (rootId: string | undefined) =>
         <div
           class="bg-white rounded-[3.5rem] shadow-2xl shadow-slate-200/60 border border-slate-200 overflow-hidden"
         >
-          <div class="p-8 md:p-14">
+          <div class="p-4 md:p-14">
             <FamilyStatsCard
               :name="activeRootData.name"
               :count="getFamilyData(activeTab).length"
