@@ -44,6 +44,7 @@ defineEmits(["edit", "delete"]);
     <!-- RENDER TABLE -->
     <div
       v-if="viewType === 'table'"
+      id="export-area-table"
       class="animate-in zoom-in-95 duration-500 pb-10"
     >
       <FamilyTable
@@ -58,7 +59,11 @@ defineEmits(["edit", "delete"]);
     </div>
 
     <!-- RENDER CHART -->
-    <div v-else class="animate-in slide-in-from-right-8 duration-500 relative">
+    <div
+      v-else
+      id="export-area-chart"
+      class="animate-in slide-in-from-right-8 duration-500 relative"
+    >
       <!-- Container Scroll Chart -->
       <div
         class="overflow-x-auto pb-12 custom-scrollbar rounded-[2.5rem] bg-slate-50 border border-slate-200 shadow-inner"

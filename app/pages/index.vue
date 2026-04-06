@@ -6,6 +6,17 @@ const { user } = useAuth();
 const { listToTree } = useFamilyData();
 const service = useFamilyService();
 
+const { exportToImage } = useExport();
+
+const handleExport = async () => {
+  const mode = viewType.value; // 'chart' atau 'table'
+  const baniName = activeRootData.value?.name || "Silsilah";
+  const elementId =
+    mode === "chart" ? "export-area-chart" : "export-area-table";
+
+  await exportToImage(elementId, `Silsilah-${baniName}-${mode}`);
+};
+
 // State Utama
 const viewType = ref<"chart" | "table">("chart");
 const rawData = ref<FamilyMember[]>([]);
@@ -221,9 +232,35 @@ const confirmDelete = async () => {
       <!-- TAMPILAN SILSILAH -->
       <div v-else>
         <div class="space-y-10 mb-12">
-          <div class="flex justify-center">
+          <div
+            class="flex flex-col md:flex-row items-center justify-center gap-4"
+          >
+            <!-- Toggle View -->
             <FamilyViewToggle v-model="viewType" />
+
+            <!-- TOMBOL EXPORT -->
+            <button
+              @click="handleExport"
+              class="flex items-center gap-2 px-6 py-2.5 bg-white border-2 border-slate-200 text-slate-600 rounded-xl text-xs font-black uppercase shadow-sm hover:border-emerald-500 hover:text-emerald-600 transition-all active:scale-95"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="3"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                />
+              </svg>
+              Simpan Gambar
+            </button>
           </div>
+
           <FamilyBaniSelector
             v-model:activeTab="activeTab"
             :rootMembers="rootMembers"
@@ -270,7 +307,7 @@ const confirmDelete = async () => {
                   :viewType="viewType"
                   :treeData="getTreeData(activeTab)"
                   :maxGen="activeMaxGen"
-                  :isAdmin="!!user" 
+                  :isAdmin="!!user"
                   @edit="onEdit"
                   @delete="onDelete"
                 />
