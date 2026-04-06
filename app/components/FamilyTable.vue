@@ -72,6 +72,7 @@ const gridData = computed(() => generateGrid(props.rootNode, props.maxGen));
 
               <!-- Action Buttons (Muncul saat Hover) -->
               <div
+                v-if="cell.gen !== 1"
                 class="flex gap-1 transition-opacity ml-2"
               >
                 <button

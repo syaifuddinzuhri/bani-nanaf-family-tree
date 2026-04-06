@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
@@ -27,7 +28,7 @@ export default defineNuxtConfig({
       meta: [
         { name: 'description', content: 'Arsip Digital Silsilah Keluarga Besar Bani Nanaf (Mbah Naimin & Nafsiah).' },
         { name: 'keywords', content: 'silsilah keluarga, bani nanaf, mbah naimin, nafsiah, nasab keluarga, family tree digital, silsilah bani' },
-        { name: 'theme-color', content: '#10b981' }, 
+        { name: 'theme-color', content: '#10b981' },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
       ],
     }
