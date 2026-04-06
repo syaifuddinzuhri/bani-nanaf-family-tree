@@ -70,6 +70,12 @@ watch(isMenuOpen, (val) => {
         <NuxtLink to="/" class="nav-link" exact-active-class="nav-link-active"
           >Nasab</NuxtLink
         >
+        <NuxtLink
+          to="/ahli-kubur"
+          class="nav-link"
+          exact-active-class="nav-link-active"
+          >Ahli Kubur</NuxtLink
+        >
         <!-- Tombol Logout jika user login -->
         <button
           v-if="user"
@@ -87,15 +93,6 @@ watch(isMenuOpen, (val) => {
         >
           Login Admin
         </button>
-        <!-- <NuxtLink
-          to="/"
-          class="nav-link"
-             exact-active-class="nav-link-active"
-          >Ahli Kubur</NuxtLink
-        >
-        <NuxtLink to="/" class="nav-link"    exact-active-class="nav-link-active"
-          >Galeri</NuxtLink
-        > -->
       </div>
 
       <!-- TOMBOL HAMBURGER -->
@@ -177,6 +174,9 @@ watch(isMenuOpen, (val) => {
           >
             <span class="text-xs text-slate-400">01</span> Nasab Keluarga
           </NuxtLink>
+          <NuxtLink to="/ahli-kubur" class="mobile-nav-link" @click="closeMenu">
+            <span class="text-xs text-slate-400">02</span> Ahli Kubur
+          </NuxtLink>
           <!-- Tombol Logout jika user login -->
           <button
             v-if="user"
@@ -194,12 +194,6 @@ watch(isMenuOpen, (val) => {
           >
             Login Admin
           </button>
-          <!-- <NuxtLink to="/" class="mobile-nav-link" @click="closeMenu">
-            <span class="text-xs text-slate-400">02</span> Ahli Kubur
-          </NuxtLink>
-          <NuxtLink to="/" class="mobile-nav-link" @click="closeMenu">
-            <span class="text-xs text-slate-400">03</span> Galeri Foto
-          </NuxtLink> -->
         </div>
       </div>
     </transition>
