@@ -49,10 +49,9 @@ watch(isMenuOpen, (val) => {
           </span>
 
           <!-- Badge Belum Final -->
-          <span
+          <!-- <span
             class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-amber-600"
           >
-            <!-- Dot Animasi Pulse -->
             <span
               class="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"
             ></span>
@@ -61,7 +60,7 @@ watch(isMenuOpen, (val) => {
             >
               Data Masih Belum FIX
             </span>
-          </span>
+          </span> -->
         </div>
       </NuxtLink>
 

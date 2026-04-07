@@ -26,6 +26,11 @@ export default defineNuxtConfig({
         'html-to-image',
         'jspdf',
         'lucide-vue-next',
+        '@vue/devtools-core',
+        '@vue/devtools-kit',
+        'firebase/app',
+        'firebase/firestore',
+        'firebase/auth',
       ]
     }
   },
