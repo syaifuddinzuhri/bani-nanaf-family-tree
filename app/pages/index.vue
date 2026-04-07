@@ -20,7 +20,7 @@ const handleExport = async (format: "png" | "pdf") => {
   let rawName = activeRootData.value?.name || "";
 
   if (rawName !== "" && activeRootData?.value?.spouse) {
-    rawName += ` + ${activeRootData?.value?.spouse}`;
+    rawName += ` ${activeRootData?.value?.spouse}`;
   }
 
   // 2. Format nama: Kecilkan semua huruf, hapus spasi di awal/akhir,
