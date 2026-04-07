@@ -16,7 +16,7 @@ export const useFamilyData = () => {
             // ==========================================
             // ROOT 3: LASEMUN
             // ==========================================
-            { id: 'r3', name: 'Lasemun', gender: 'L', spouse: 'Mak Sup', parentId: null, gen: 1, rootId: 'r3', sortOrder: 0 },
+            { id: 'r3', name: 'Lasemun', gender: 'L', spouse: 'Mak Supi', parentId: null, gen: 1, rootId: 'r3', sortOrder: 0 },
 
             // ==========================================
             // ROOT 4: NASIAH
