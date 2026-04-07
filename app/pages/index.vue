@@ -357,8 +357,7 @@ const confirmDelete = async () => {
     </template>
 
     <div
-      class="absolute top-[5000px] left-0 overflow-visible shadow-none border-none pointer-events-none"
-      style="z-index: -1000"
+      class="fixed top-0 left-0 w-0 h-0 overflow-hidden opacity-0 -z-50 pointer-events-none"
     >
       <div id="shadow-export-area">
         <FamilyExportTemplate

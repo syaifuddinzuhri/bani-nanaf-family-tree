@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { FamilyMemberNode } from "~/types/family";
+import { LOGO_BASE64 } from '~/constants/logo';
 
 defineProps<{
   treeData: FamilyMemberNode[];
@@ -47,13 +48,14 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
     >
       <div>
         <div class="flex items-center gap-4 mb-4">
-          <div
+          <img :src="LOGO_BASE64" class="w-20 h-20 object-contain" />
+          <!-- <div
             v-if="logoBase64"
             :style="{ backgroundImage: `url(${logoBase64})` }"
             class="w-20 h-20 bg-contain bg-no-repeat bg-center"
           ></div>
 
-          <img src="/logo-green.webp" class="hidden" />
+          <img src="/logo-green.webp" class="hidden" /> -->
           <p
             class="text-emerald-600 font-black uppercase text-xs tracking-[0.5em]"
           >
@@ -73,7 +75,7 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
       </div>
 
       <div
-        class="flex gap-10 bg-slate-50 px-12 py-8 rounded-[3rem] border border-slate-100 shadow-inner"
+        class="flex gap-10 bg-slate-50 px-12 py-8 rounded-[3rem] border border-slate-100"
       >
         <div class="text-center">
           <div class="text-4xl font-black text-emerald-600 leading-none">

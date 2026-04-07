@@ -7,10 +7,20 @@ export const useExport = () => {
         if (!node) return;
 
         try {
+            // 1. Tambahkan pengecekan apakah semua gambar di dalam node sudah ter-load
+            const images = node.getElementsByTagName('img');
+            const imagePromises = Array.from(images).map(img => {
+                if (img.complete) return Promise.resolve();
+                return new Promise(resolve => { img.onload = resolve; img.onerror = resolve; });
+            });
+
+            await Promise.all(imagePromises);
+
             await toSvg(node)
             
-            // 1. Berikan delay untuk rendering
-            await new Promise(resolve => setTimeout(resolve, 800));
+            // 2. Berikan delay tambahan khusus untuk WebKit (iOS)
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
 
             const width = node.scrollWidth;
             const height = node.scrollHeight;
