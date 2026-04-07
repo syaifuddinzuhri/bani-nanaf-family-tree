@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { FamilyMemberNode } from "~/types/family";
-import { LOGO_BASE64 } from '~/constants/logo';
+import { LOGO_BASE64 } from "~/constants/logo";
 
 defineProps<{
   treeData: FamilyMemberNode[];
@@ -32,6 +32,7 @@ onMounted(() => {
   loadLogoAsBase64();
 });
 
+const logoError = ref(false);
 const currentDate = new Date().toLocaleDateString("id-ID", {
   year: "numeric",
   month: "long",
@@ -48,14 +49,25 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
     >
       <div>
         <div class="flex items-center gap-4 mb-4">
-          <img :src="LOGO_BASE64" class="w-20 h-20 object-contain" />
-          <!-- <div
-            v-if="logoBase64"
-            :style="{ backgroundImage: `url(${logoBase64})` }"
-            class="w-20 h-20 bg-contain bg-no-repeat bg-center"
-          ></div>
+          <div class="w-20 h-20 flex items-center justify-center">
+            <!-- Tampilkan Image jika tidak error -->
+            <img
+              v-if="!logoError && LOGO_BASE64"
+              :src="LOGO_BASE64"
+              @error="logoError = true"
+              class="w-full h-full object-contain"
+            />
 
-          <img src="/logo-green.webp" class="hidden" /> -->
+            <!-- PLACEHOLDER: Muncul jika gambar error atau tidak ada -->
+            <div
+              v-else
+              class="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center text-emerald-500 font-black text-2xl italic shadow-xl border-2 border-emerald-500/20"
+            >
+              BN
+            </div>
+          </div>
+
+          <div class="h-10 w-px bg-slate-200"></div>
           <p
             class="text-emerald-600 font-black uppercase text-xs tracking-[0.5em]"
           >
