@@ -279,7 +279,7 @@ const confirmDelete = async () => {
             <div
               class="bg-white rounded-[3.5rem] shadow-2xl shadow-slate-200/60 border border-slate-200 overflow-hidden mb-20"
             >
-              <div class="p-6 md:p-14">
+              <div class="p-6 md:p-8">
                 <!-- <FamilyStatsCard
                   :name="activeRootData.name"
                   :count="getFamilyData(activeTab).length"
