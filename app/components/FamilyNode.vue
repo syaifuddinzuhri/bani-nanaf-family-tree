@@ -38,7 +38,7 @@ defineProps<{ node: FamilyMemberNode }>();
 
         <div
           v-if="node.spouse"
-          class="text-[13px] text-emerald-600 italic font-bold truncate"
+          class="text-[14px] text-emerald-600 italic font-bold line-clamp-2"
         >
           + {{ node.spouse }}
         </div>

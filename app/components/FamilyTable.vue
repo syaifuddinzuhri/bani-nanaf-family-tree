@@ -64,7 +64,7 @@ const gridData = computed(() => generateGrid(props.rootNode, props.maxGen));
                   </div>
                   <div
                     v-if="cell.spouse"
-                    class="text-[13px] text-emerald-600 italic mt-1 font-bold"
+                    class="text-[14px] text-emerald-600 italic mt-1 font-bold"
                   >
                     + {{ cell.spouse }}
                   </div>
