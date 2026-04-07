@@ -20,6 +20,15 @@ export default defineNuxtConfig({
       }
     }
   },
+  vite: {
+    optimizeDeps: {
+      include: [
+        'html-to-image',
+        'jspdf',
+        'lucide-vue-next',
+      ]
+    }
+  },
   app: {
     head: {
       title: 'Bani Nanaf | Silsilah Keluarga Digital',
