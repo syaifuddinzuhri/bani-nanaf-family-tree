@@ -14,8 +14,8 @@ const logoBase64 = ref("");
 // Fungsi untuk konversi image ke Base64 agar terbaca saat export di HP
 const loadLogoAsBase64 = async () => {
   try {
-    // Ambil logo langsung dari folder public
-    const response = await fetch("/logo-green.webp");
+    // Gunakan cache: 'no-cache' agar Safari benar-benar mengambil data segar
+    const response = await fetch("/logo-green.webp", { cache: "no-cache" });
     const blob = await response.blob();
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -23,7 +23,7 @@ const loadLogoAsBase64 = async () => {
     };
     reader.readAsDataURL(blob);
   } catch (e) {
-    console.error("Gagal memuat logo untuk export", e);
+    console.error("Gagal load logo:", e);
   }
 };
 
@@ -47,10 +47,13 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
     >
       <div>
         <div class="flex items-center gap-4 mb-4">
-          <img
-            :src="logoBase64 || '/logo-green.webp'"
-            class="w-16 h-16 object-contain"
-          />
+          <div
+            v-if="logoBase64"
+            :style="{ backgroundImage: `url(${logoBase64})` }"
+            class="w-20 h-20 bg-contain bg-no-repeat bg-center"
+          ></div>
+
+          <img src="/logo-green.webp" class="hidden" />
           <p
             class="text-emerald-600 font-black uppercase text-xs tracking-[0.5em]"
           >
