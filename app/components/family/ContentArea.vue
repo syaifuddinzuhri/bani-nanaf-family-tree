@@ -28,7 +28,7 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
   >
     <div
       id="export-header"
-      class="p-4 md:p-14 bg-white border-b-8 border-emerald-500 flex flex-col lg:flex-row justify-between items-center gap-10"
+      class="p-4 md:p-8 bg-white border-b-8 border-emerald-500 flex flex-col lg:flex-row justify-between items-center gap-10"
     >
       <!-- Sisi Kiri: Judul & Identitas -->
       <div class="text-center lg:text-left space-y-4">
@@ -42,7 +42,7 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
           />
           <div class="h-8 w-px bg-slate-200 hidden lg:block"></div>
           <p
-            class="text-emerald-600 font-black uppercase text-[10px] tracking-[0.5em]"
+            class="text-emerald-600 font-black uppercase text-[10px] tracking-[0.3em]"
           >
             Dokumen Digital Bani Nanaf
           </p>
@@ -91,7 +91,7 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
       </div>
     </div>
 
-    <div class="relative pt-6 p-4 md:p-10">
+    <div class="relative pt-6 p-4 md:p-6">
       <!-- HINT (Akan ikut terfoto, tapi kita bisa sembunyikan jika mau) -->
       <!-- Jika ingin hint hilang di gambar, tambahkan class 'data-html2canvas-ignore' -->
 
@@ -117,7 +117,7 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
         class="animate-in slide-in-from-right-8 duration-500 relative"
       >
         <div class="overflow-x-auto custom-scrollbar pb-12 rounded-[2.5rem]">
-          <div class="min-w-max p-4 md:p-8">
+          <div class="min-w-max p-1 md:p-2">
             <!-- Header Generasi -->
             <div class="flex mb-14 border-b-2 border-slate-200 pb-8 ml-4">
               <div
@@ -149,7 +149,7 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
 
     <!-- Footer Khusus Gambar -->
     <div
-      class="px-6 py-8 md:px-14 md:py-6 bg-slate-50 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] font-black uppercase text-slate-300 tracking-[0.2em] md:tracking-[0.3em]"
+      class="px-6 py-8 md:px-8 md:py-6 bg-slate-50 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] font-black uppercase text-slate-300 tracking-[0.2em] md:tracking-[0.3em]"
     >
       <!-- Sisi Kiri / Atas (Mobile) -->
       <div class="flex items-center gap-2 text-center md:text-left">

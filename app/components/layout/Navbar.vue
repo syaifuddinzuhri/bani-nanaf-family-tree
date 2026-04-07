@@ -82,12 +82,12 @@ watch(isMenuOpen, (val) => {
           exact-active-class="nav-link-active"
           >Agenda</NuxtLink
         >
-        <NuxtLink
+        <!-- <NuxtLink
           to="/galeri"
           class="nav-link"
           exact-active-class="nav-link-active"
           >Galeri</NuxtLink
-        >
+        > -->
         <!-- Tombol Logout jika user login -->
         <button
           v-if="user"
@@ -192,9 +192,9 @@ watch(isMenuOpen, (val) => {
           <NuxtLink to="/agenda" class="mobile-nav-link" @click="closeMenu">
             <span class="text-xs text-slate-400">03</span> Agenda
           </NuxtLink>
-          <NuxtLink to="/agenda" class="mobile-nav-link" @click="closeMenu">
+          <!-- <NuxtLink to="/agenda" class="mobile-nav-link" @click="closeMenu">
             <span class="text-xs text-slate-400">04</span> Galeri
-          </NuxtLink>
+          </NuxtLink> -->
           <!-- Tombol Logout jika user login -->
           <button
             v-if="user"
