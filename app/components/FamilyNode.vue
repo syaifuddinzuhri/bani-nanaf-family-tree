@@ -18,7 +18,7 @@ defineProps<{ node: FamilyMemberNode }>();
           class="flex justify-between items-start mb-2 border-b border-slate-100 pb-2"
         >
           <div
-            class="text-[12px] font-black uppercase tracking-tight truncate pr-2"
+            class="text-[12px] font-black uppercase tracking-tight line-clamp-2 pr-2"
           >
             {{ node.name }}
           </div>
@@ -38,7 +38,7 @@ defineProps<{ node: FamilyMemberNode }>();
 
         <div
           v-if="node.spouse"
-          class="text-[11px] text-emerald-600 italic font-bold truncate"
+          class="text-[12px] text-emerald-600 italic font-bold truncate"
         >
           + {{ node.spouse }}
         </div>

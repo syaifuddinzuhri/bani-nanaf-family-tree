@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { FamilyMemberNode } from "~/types/family";
-import { LOGO_BASE64 } from "~/constants/logo";
 
 defineProps<{
   treeData: FamilyMemberNode[];
@@ -10,27 +9,6 @@ defineProps<{
   viewType: "chart" | "table";
 }>();
 
-const logoBase64 = ref("");
-
-// Fungsi untuk konversi image ke Base64 agar terbaca saat export di HP
-const loadLogoAsBase64 = async () => {
-  try {
-    // Gunakan cache: 'no-cache' agar Safari benar-benar mengambil data segar
-    const response = await fetch("/logo-green.webp", { cache: "no-cache" });
-    const blob = await response.blob();
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      logoBase64.value = reader.result as string;
-    };
-    reader.readAsDataURL(blob);
-  } catch (e) {
-    console.error("Gagal load logo:", e);
-  }
-};
-
-onMounted(() => {
-  loadLogoAsBase64();
-});
 
 const logoError = ref(false);
 const currentDate = new Date().toLocaleDateString("id-ID", {
@@ -49,24 +27,9 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
     >
       <div>
         <div class="flex items-center gap-4 mb-4">
-          <div class="w-20 h-20 flex items-center justify-center">
-            <!-- Tampilkan Image jika tidak error -->
-            <img
-              v-if="!logoError && LOGO_BASE64"
-              :src="LOGO_BASE64"
-              @error="logoError = true"
-              class="w-full h-full object-contain"
-            />
-
-            <!-- PLACEHOLDER: Muncul jika gambar error atau tidak ada -->
-            <div
-              v-else
-              class="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center text-emerald-500 font-black text-2xl italic shadow-xl border-2 border-emerald-500/20"
-            >
-              BN
-            </div>
+          <div class="w-20 h-20">
+            <FamilyLogoBaniNanaf />
           </div>
-
           <div class="h-10 w-px bg-slate-200"></div>
           <p
             class="text-emerald-600 font-black uppercase text-xs tracking-[0.5em]"
