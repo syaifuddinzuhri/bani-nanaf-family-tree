@@ -374,7 +374,7 @@ const confirmDelete = async () => {
           :treeData="getTreeData(activeTab)"
           :maxGen="activeMaxGen"
           :count="getFamilyData(activeTab).length"
-          :activeBaniName="activeRootData.name"
+          :activeBaniName="activeBaniNameFull"
           :viewType="viewType"
         />
       </div>
