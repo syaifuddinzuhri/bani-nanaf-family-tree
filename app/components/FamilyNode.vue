@@ -11,7 +11,7 @@ defineProps<{ node: FamilyMemberNode }>();
       <div
         :class="[
           node.gender === 'L' ? 'border-blue-400' : 'border-pink-400',
-          'w-48 bg-white text-slate-900 p-4 rounded-2xl shadow-xl border-2 z-10 transition-all hover:scale-105 group'
+          'w-48 bg-white text-slate-900 p-4 rounded-2xl border-2 z-10 transition-all hover:scale-105 group'
         ]"
       >
         <div

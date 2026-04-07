@@ -9,6 +9,29 @@ defineProps<{
   viewType: "chart" | "table";
 }>();
 
+const logoBase64 = ref("");
+
+// Fungsi untuk konversi image ke Base64 agar terbaca saat export di HP
+const convertLogoToBase64 = () => {
+  const img = new Image();
+  img.crossOrigin = "Anonymous";
+  img.src = "/logo-green.webp";
+  img.onload = () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext("2d");
+    if (ctx) {
+      ctx.drawImage(img, 0, 0);
+      logoBase64.value = canvas.toDataURL("image/webp");
+    }
+  };
+};
+
+onMounted(() => {
+  convertLogoToBase64();
+});
+
 const currentDate = new Date().toLocaleDateString("id-ID", {
   year: "numeric",
   month: "long",
@@ -25,7 +48,7 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
     >
       <div>
         <div class="flex items-center gap-4 mb-4">
-          <img src="/logo-green.webp" class="w-16 h-16 object-contain" />
+          <img :src="logoBase64 || '/logo-green.webp'" class="w-16 h-16 object-contain" />
           <p
             class="text-emerald-600 font-black uppercase text-xs tracking-[0.5em]"
           >
