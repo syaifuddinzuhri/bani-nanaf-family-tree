@@ -7,18 +7,23 @@ export const useExport = () => {
         if (!node) return;
 
         try {
-            // 1. Dapatkan ukuran asli elemen shadow
+            // 1. Tambahkan delay kecil agar gambar Base64 benar-benar ter-render oleh browser
+            await new Promise(resolve => setTimeout(resolve, 500));
+
             const width = node.scrollWidth;
             const height = node.scrollHeight;
 
-            // 2. Foto elemen shadow tersebut
+            // 2. Gunakan toPng dengan opsi yang lebih ketat
             const dataUrl = await toPng(node, {
                 width: width,
                 height: height,
-                pixelRatio: 2, // Biar hasil sangat tajam
+                pixelRatio: 2,
                 backgroundColor: '#ffffff',
                 skipFonts: false,
-                cacheBust: true,
+                cacheBust: true, // Membersihkan cache agar gambar terbaru diambil
+                style: {
+                    visibility: 'visible',
+                }
             });
 
             if (format === 'png') {
