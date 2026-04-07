@@ -17,7 +17,11 @@ const handleExport = async (format: "png" | "pdf") => {
   await nextTick();
 
   // 1. Ambil nama bani, default ke "unknown"
-  const rawName = activeRootData.value?.name || "unknown";
+  let rawName = activeRootData.value?.name || "";
+
+  if (rawName !== "" && activeRootData?.value?.spouse) {
+    rawName += ` + ${activeRootData?.value?.spouse}`;
+  }
 
   // 2. Format nama: Kecilkan semua huruf, hapus spasi di awal/akhir,
   //    lalu ganti semua spasi di tengah menjadi "-"
