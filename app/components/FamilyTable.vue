@@ -58,13 +58,13 @@ const gridData = computed(() => generateGrid(props.rootNode, props.maxGen));
                 </div>
                 <div>
                   <div
-                    class="font-black text-slate-900 text-sm uppercase leading-tight tracking-tight"
+                    class="font-black text-slate-900 text-sm uppercase leading-tight line-clamp-2 tracking-tight"
                   >
                     {{ cell.name }}
                   </div>
                   <div
                     v-if="cell.spouse"
-                    class="text-[10px] text-emerald-600 italic mt-1 font-bold"
+                    class="text-[12px] text-emerald-600 italic mt-1 font-bold"
                   >
                     + {{ cell.spouse }}
                   </div>

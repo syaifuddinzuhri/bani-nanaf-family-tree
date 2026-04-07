@@ -357,10 +357,9 @@ const confirmDelete = async () => {
     </template>
 
     <div
-      class="absolute left-0 pointer-events-none"
-      style="top: 5000px; z-index: -1000; overflow: visible"
+      class="fixed top-0 left-0 w-0 h-0 overflow-hidden opacity-[0.02] pointer-events-none z-[-100]"
     >
-      <div id="shadow-export-area" style="display: block !important">
+      <div id="shadow-export-area">
         <FamilyExportTemplate
           v-if="activeRootData"
           :treeData="getTreeData(activeTab)"
