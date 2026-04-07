@@ -1,4 +1,4 @@
-import { toPng } from 'html-to-image';
+import { toJpeg, toSvg } from 'html-to-image'; // Ganti toPng ke toJpeg
 import { jsPDF } from 'jspdf';
 
 export const useExport = () => {
@@ -7,38 +7,40 @@ export const useExport = () => {
         if (!node) return;
 
         try {
-            // 1. Tambahkan delay kecil agar gambar Base64 benar-benar ter-render oleh browser
+            await toSvg(node)
+            
+            // 1. Berikan delay untuk rendering
             await new Promise(resolve => setTimeout(resolve, 800));
 
             const width = node.scrollWidth;
             const height = node.scrollHeight;
 
-            // 2. Gunakan toPng dengan opsi yang lebih ketat
-            const dataUrl = await toPng(node, {
+            // 2. Gunakan toJpeg (bukan PNG) karena jauh lebih ringan
+            const dataUrl = await toJpeg(node, {
                 width: width,
                 height: height,
-                pixelRatio: 2,
+                pixelRatio: 1.5, // 1.5x sudah sangat cukup untuk cetak A3 sekalipun
+                quality: 0.85,    // Kompresi 85% (kualitas tetap sangat bagus, ukuran file anjlok)
                 backgroundColor: '#ffffff',
-                skipFonts: false,
-                preferredFontFormat: 'woff2',
-                cacheBust: true, // Membersihkan cache agar gambar terbaru diambil
-                style: {
-                    visibility: 'visible',
-                }
+                cacheBust: true,
             });
 
             if (format === 'png') {
                 const link = document.createElement('a');
-                link.download = `${fileName}.png`;
+                link.download = `${fileName}.jpg`; // Gunakan .jpg
                 link.href = dataUrl;
                 link.click();
             } else {
+                // 3. Tambahkan kompresi internal pada jsPDF
                 const pdf = new jsPDF({
                     orientation: width > height ? 'l' : 'p',
                     unit: 'px',
-                    format: [width, height]
+                    format: [width, height],
+                    compress: true // Aktifkan kompresi internal PDF
                 });
-                pdf.addImage(dataUrl, 'PNG', 0, 0, width, height);
+
+                // 'FAST' adalah metode kompresi jsPDF
+                pdf.addImage(dataUrl, 'JPEG', 0, 0, width, height, undefined, 'FAST');
                 pdf.save(`${fileName}.pdf`);
             }
         } catch (err) {
