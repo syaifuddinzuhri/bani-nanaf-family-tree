@@ -58,7 +58,7 @@ const select = (id: string) => {
               : 'text-slate-600'
           "
         >
-          Keluarga {{ root.name }}
+          Keluarga {{ root.name }} {{ root.spouse ? `+ ${root.spouse}` : '' }}
         </button>
       </div>
     </div>
