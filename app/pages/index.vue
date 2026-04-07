@@ -16,9 +16,9 @@ const handleExport = async (format: "png" | "pdf") => {
   // Berikan sedikit waktu agar DOM shadow merender data terbaru
   await nextTick();
 
-  const baniName = activeRootData.value?.name || "Keluarga";
+  const baniName = activeRootData.value?.name || "unknown";
   try {
-    await exportHighRes("shadow-export-area", `Silsilah-${baniName}`, format);
+    await exportHighRes("shadow-export-area", `silsilah-keluarga-${baniName}`, format);
   } catch (error) {
     console.log(error);
   }
