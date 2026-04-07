@@ -246,7 +246,7 @@ const handlePrepareSave = () => {
             >
               <option :value="null" disabled>-- Pilih Orang Tua --</option>
               <option v-for="p in parentOptions" :key="p.id" :value="p.id">
-                Gen {{ p.gen }} - {{ p.name }}
+                Gen {{ p.gen }} - {{ p.name }} {{ p.spouse ? `+ ${p.spouse}` : '' }}
               </option>
             </select>
           </div>

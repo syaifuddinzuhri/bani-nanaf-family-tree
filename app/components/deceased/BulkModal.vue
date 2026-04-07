@@ -49,7 +49,7 @@ const handleSave = async () => {
             class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 text-sm font-bold outline-none focus:border-emerald-500"
           >
             <option v-for="r in roots" :key="r.id" :value="r.id">
-              Keluarga {{ r.name }}
+              Keluarga {{ r.name }} {{ r.spouse ? `+ ${r.spouse}` : '' }}
             </option>
           </select>
         </div>
