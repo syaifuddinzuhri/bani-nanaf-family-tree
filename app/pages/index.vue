@@ -27,7 +27,9 @@ const handleExport = async (format: "png" | "pdf") => {
   //    lalu ganti semua spasi di tengah menjadi "-"
   const formattedBaniName = rawName.toLowerCase().trim().replace(/\s+/g, "-");
 
-  const fileName = `silsilah-keluarga-${formattedBaniName}`;
+  const fileName = `${
+    viewType.value === "chart" ? "bagan" : "tabel"
+  }-silsilah-keluarga-${formattedBaniName}`;
 
   try {
     await exportHighRes("shadow-export-area", fileName, format);
