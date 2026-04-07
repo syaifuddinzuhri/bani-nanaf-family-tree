@@ -267,11 +267,11 @@ const confirmDelete = async () => {
                   :gen="activeMaxGen"
                 /> -->
 
-                <div class="flex flex-col md:flex-row justify-end mb-6 gap-3">
-                  <div class="relative">
+                <div class="flex flex-col md:flex-row justify-end items-end md:items-start mb-6 gap-3">
+                  <div class="relative w-full md:w-auto">
                     <button
                       @click="showExportMenu = !showExportMenu"
-                      class="flex items-center gap-2 px-6 py-2.5 bg-white border-2 border-slate-200 text-slate-600 rounded-2xl text-xs font-black uppercase shadow-sm hover:border-emerald-500 transition-all"
+                      class="w-full md:w-auto flex items-center justify-center gap-2 px-6 py-2.5 bg-white border-2 border-slate-200 text-slate-600 rounded-2xl text-xs font-black uppercase shadow-sm hover:border-emerald-500 transition-all"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -307,9 +307,9 @@ const confirmDelete = async () => {
                     </div>
                   </div>
                   <button
-                    v-if="user"
+                    v-if="!user"
                     @click="onAdd"
-                    class="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl text-xs font-black uppercase shadow-lg shadow-emerald-200 hover:bg-emerald-700 transition-all active:scale-95"
+                    class="w-full md:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl text-xs font-black uppercase shadow-lg shadow-emerald-200 hover:bg-emerald-700 transition-all active:scale-95"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
