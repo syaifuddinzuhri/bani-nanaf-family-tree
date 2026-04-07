@@ -307,7 +307,7 @@ const confirmDelete = async () => {
                     </div>
                   </div>
                   <button
-                    v-if="!user"
+                    v-if="user"
                     @click="onAdd"
                     class="w-full md:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl text-xs font-black uppercase shadow-lg shadow-emerald-200 hover:bg-emerald-700 transition-all active:scale-95"
                   >
