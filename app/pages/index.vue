@@ -16,9 +16,17 @@ const handleExport = async (format: "png" | "pdf") => {
   // Berikan sedikit waktu agar DOM shadow merender data terbaru
   await nextTick();
 
-  const baniName = activeRootData.value?.name || "unknown";
+  // 1. Ambil nama bani, default ke "unknown"
+  const rawName = activeRootData.value?.name || "unknown";
+
+  // 2. Format nama: Kecilkan semua huruf, hapus spasi di awal/akhir,
+  //    lalu ganti semua spasi di tengah menjadi "-"
+  const formattedBaniName = rawName.toLowerCase().trim().replace(/\s+/g, "-");
+
+  const fileName = `silsilah-keluarga-${formattedBaniName}`;
+
   try {
-    await exportHighRes("shadow-export-area", `silsilah-keluarga-${baniName}`, format);
+    await exportHighRes("shadow-export-area", fileName, format);
   } catch (error) {
     console.log(error);
   }
@@ -267,7 +275,9 @@ const confirmDelete = async () => {
                   :gen="activeMaxGen"
                 /> -->
 
-                <div class="flex flex-col md:flex-row justify-end items-end md:items-start mb-6 gap-3">
+                <div
+                  class="flex flex-col md:flex-row justify-end items-end md:items-start mb-6 gap-3"
+                >
                   <div class="relative w-full md:w-auto">
                     <button
                       @click="showExportMenu = !showExportMenu"
@@ -346,7 +356,9 @@ const confirmDelete = async () => {
       </div>
     </template>
 
-    <div class="fixed left-[-9999px] top-[-9999px] overflow-visible">
+    <div
+      class="fixed top-0 left-0 w-0 h-0 overflow-hidden opacity-0 -z-50 pointer-events-none"
+    >
       <div id="shadow-export-area">
         <FamilyExportTemplate
           v-if="activeRootData"

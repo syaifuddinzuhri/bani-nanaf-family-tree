@@ -8,7 +8,7 @@ export const useExport = () => {
 
         try {
             // 1. Tambahkan delay kecil agar gambar Base64 benar-benar ter-render oleh browser
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await new Promise(resolve => setTimeout(resolve, 800));
 
             const width = node.scrollWidth;
             const height = node.scrollHeight;
@@ -20,6 +20,7 @@ export const useExport = () => {
                 pixelRatio: 2,
                 backgroundColor: '#ffffff',
                 skipFonts: false,
+                preferredFontFormat: 'woff2',
                 cacheBust: true, // Membersihkan cache agar gambar terbaru diambil
                 style: {
                     visibility: 'visible',
