@@ -120,7 +120,7 @@ const handleSave = async () => {
 
         <div>
           <label class="text-[10px] font-black uppercase text-slate-400 ml-1"
-            >Tuan Rumah (Dari Data Member)</label
+            >Tuan Rumah</label
           >
           <select
             v-model="form.hostId"

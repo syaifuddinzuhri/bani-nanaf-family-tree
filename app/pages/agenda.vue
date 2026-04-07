@@ -35,12 +35,22 @@ const filteredAgenda = computed(() => {
 const loadData = async () => {
   isLoading.value = true;
   try {
+    // 1. Ambil data dari kedua koleksi secara paralel
     const [mRes, aRes] = await Promise.all([
       getAllMembers(),
       getAgendasByPeriod(currentPeriod.value)
     ]);
+
     members.value = mRes;
-    agendaList.value = aRes;
+
+    // 2. NESTED MAPPING: Masukkan objek member ke dalam agenda
+    agendaList.value = aRes.map((agenda) => {
+      return {
+        ...agenda,
+        // Cari data member yang ID-nya cocok dengan hostId agenda
+        hostDetails: mRes.find((m) => m.id === agenda.hostId)
+      };
+    });
   } catch (error: any) {
     console.error("Gagal memuat data:", error);
   } finally {
@@ -221,7 +231,12 @@ const formatDate = (dateStr: string) => {
               <h3
                 class="text-xl font-black text-slate-900 uppercase italic leading-tight mb-2"
               >
-                Tuan Rumah: {{ item.hostName }}
+                {{ item.hostDetails?.name }}
+                {{
+                  item.hostDetails?.spouse
+                    ? "+ " + item.hostDetails?.spouse
+                    : ""
+                }}
               </h3>
               <div class="flex items-center gap-2 text-slate-400">
                 <svg
@@ -246,7 +261,7 @@ const formatDate = (dateStr: string) => {
           <div v-if="user" class="flex gap-2">
             <button
               @click="triggerEdit(item)"
-              class="p-4 bg-slate-50 text-slate-400 hover:text-emerald-600 rounded-2xl transition-all"
+              class="p-2 bg-slate-50 text-slate-400 hover:text-emerald-600 rounded-2xl transition-all"
             >
               <svg
                 class="w-5 h-5"
@@ -261,7 +276,7 @@ const formatDate = (dateStr: string) => {
             </button>
             <button
               @click="triggerDelete(item)"
-              class="p-4 bg-slate-50 text-slate-400 hover:text-red-600 rounded-2xl transition-all"
+              class="p-2 bg-slate-50 text-slate-400 hover:text-red-600 rounded-2xl transition-all"
             >
               <svg
                 class="w-5 h-5"
