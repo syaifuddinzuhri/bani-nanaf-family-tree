@@ -91,6 +91,15 @@ const rootMembers = computed(() =>
 const activeRootData = computed(() =>
   rawData.value.find((r) => r.id === activeTab.value)
 );
+
+const activeBaniNameFull = computed(() => {
+  let name = activeRootData?.value?.name;
+  if (activeRootData?.value?.spouse) {
+    name += ` + ${activeRootData?.value?.spouse}`;
+  }
+  return name;
+});
+
 const getFamilyData = (rootId: string | undefined) =>
   rootId ? rawData.value.filter((m) => m.rootId === rootId) : [];
 const activeMaxGen = computed(() => {
@@ -259,7 +268,7 @@ const confirmDelete = async () => {
           <FamilyBaniSelector
             v-model:activeTab="activeTab"
             :rootMembers="rootMembers"
-            :activeName="activeRootData?.name"
+            :activeName="activeBaniNameFull"
           />
         </div>
 
@@ -345,7 +354,7 @@ const confirmDelete = async () => {
                   :maxGen="activeMaxGen"
                   :count="getFamilyData(activeTab).length"
                   :isAdmin="!!user"
-                  :activeBaniName="activeRootData?.name"
+                  :activeBaniName="activeBaniNameFull"
                   @edit="onEdit"
                   @delete="onDelete"
                 />
@@ -382,7 +391,7 @@ const confirmDelete = async () => {
       :show="showEditModal"
       :member="selectedMember"
       :allMembers="rawData"
-      :activeBaniName="activeRootData?.name"
+      :activeBaniName="activeBaniNameFull"
       @close="showEditModal = false"
       @save="onSave"
     />
