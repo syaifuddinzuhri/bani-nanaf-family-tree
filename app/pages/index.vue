@@ -267,10 +267,7 @@ const confirmDelete = async () => {
                   :gen="activeMaxGen"
                 /> -->
 
-                <div
-                  class="flex flex-col md:flex-row justify-end mb-6 gap-3"
-                  v-if="user"
-                >
+                <div class="flex flex-col md:flex-row justify-end mb-6 gap-3">
                   <div class="relative">
                     <button
                       @click="showExportMenu = !showExportMenu"
@@ -310,6 +307,7 @@ const confirmDelete = async () => {
                     </div>
                   </div>
                   <button
+                    v-if="user"
                     @click="onAdd"
                     class="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl text-xs font-black uppercase shadow-lg shadow-emerald-200 hover:bg-emerald-700 transition-all active:scale-95"
                   >
