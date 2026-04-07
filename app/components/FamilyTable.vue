@@ -17,13 +17,13 @@ const gridData = computed(() => generateGrid(props.rootNode, props.maxGen));
   <div
     class="overflow-x-auto border-2 border-slate-200 shadow-sm rounded-2xl bg-white"
   >
-    <table class="w-full border-collapse">
+    <table class="w-full table-fixed border-collapse">
       <thead>
         <tr class="bg-slate-50 border-b-2 border-slate-200">
           <th
             v-for="n in maxGen"
             :key="n"
-            class="p-4 border-r border-slate-200 text-left text-[10px] font-black uppercase text-slate-500 tracking-widest min-w-[220px]"
+            class="p-4 border-r border-slate-200 text-left text-[10px] font-black uppercase text-slate-500 tracking-widest w-[250px]"
           >
             Generasi {{ n }}
           </th>
