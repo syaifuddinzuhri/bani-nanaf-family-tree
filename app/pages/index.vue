@@ -5,22 +5,25 @@ import type { FamilyMember } from "~/types/family";
 const { user } = useAuth();
 const { listToTree } = useFamilyData();
 const service = useFamilyService();
+const isExporting = ref(false);
+const showExportMenu = ref(false);
+const { exportHighRes } = useExport();
 
-const { exportToImage } = useExport();
+const handleExport = async (format: "png" | "pdf") => {
+  isExporting.value = true;
+  showExportMenu.value = false;
 
-const handleExport = async () => {
+  // Berikan sedikit waktu agar DOM shadow merender data terbaru
+  await nextTick();
+
   const baniName = activeRootData.value?.name || "Keluarga";
-  const mode = viewType.value === "chart" ? "Bagan" : "Tabel";
-
-  // Memulai proses export
-  isProcessing.value = true;
-
   try {
-    // Kita targetkan ID 'capture-area' yang membungkus header + konten
-    await exportToImage("capture-area", `Silsilah-${baniName}-${mode}`);
-  } finally {
-    isProcessing.value = false;
+    await exportHighRes("shadow-export-area", `Silsilah-${baniName}`, format);
+  } catch (error) {
+    console.log(error);
   }
+
+  isExporting.value = false;
 };
 
 // State Utama
@@ -177,7 +180,7 @@ const confirmDelete = async () => {
 
 <template>
   <div class="min-h-screen bg-[#F8FAFC] font-sans text-slate-900">
-    <LayoutLoadingOverlay v-if="isProcessing" />
+    <LayoutLoadingOverlay v-if="isProcessing || isExporting" />
     <LayoutNavbar />
     <FamilyHero />
 
@@ -243,28 +246,6 @@ const confirmDelete = async () => {
           >
             <!-- Toggle View -->
             <FamilyViewToggle v-model="viewType" />
-
-            <!-- TOMBOL EXPORT -->
-            <!-- <button
-              @click="handleExport"
-              class="flex items-center gap-2 px-6 py-2.5 bg-white border-2 border-slate-200 text-slate-600 rounded-xl text-xs font-black uppercase shadow-sm hover:border-emerald-500 hover:text-emerald-600 transition-all active:scale-95"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="3"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                />
-              </svg>
-              Simpan Gambar
-            </button> -->
           </div>
 
           <FamilyBaniSelector
@@ -286,7 +267,48 @@ const confirmDelete = async () => {
                   :gen="activeMaxGen"
                 /> -->
 
-                <div class="flex justify-end mb-6" v-if="user">
+                <div
+                  class="flex flex-col md:flex-row justify-end mb-6 gap-3"
+                  v-if="user"
+                >
+                  <div class="relative">
+                    <button
+                      @click="showExportMenu = !showExportMenu"
+                      class="flex items-center gap-2 px-6 py-2.5 bg-white border-2 border-slate-200 text-slate-600 rounded-2xl text-xs font-black uppercase shadow-sm hover:border-emerald-500 transition-all"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="3"
+                      >
+                        <path
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                        />
+                      </svg>
+                      Simpan Dokumen
+                    </button>
+                    <!-- Dropdown Menu Export -->
+                    <div
+                      v-if="showExportMenu"
+                      class="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-2xl border border-slate-100 z-50 overflow-hidden animate-in zoom-in-95"
+                    >
+                      <button
+                        @click="handleExport('png')"
+                        class="w-full text-left px-5 py-4 text-[10px] font-black uppercase text-slate-600 hover:bg-slate-50 border-b flex justify-between"
+                      >
+                        Format Gambar <span>HD</span>
+                      </button>
+                      <button
+                        @click="handleExport('pdf')"
+                        class="w-full text-left px-5 py-4 text-[10px] font-black uppercase text-slate-600 hover:bg-slate-50 flex justify-between"
+                      >
+                        Format PDF <span>A4</span>
+                      </button>
+                    </div>
+                  </div>
                   <button
                     @click="onAdd"
                     class="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl text-xs font-black uppercase shadow-lg shadow-emerald-200 hover:bg-emerald-700 transition-all active:scale-95"
@@ -325,6 +347,19 @@ const confirmDelete = async () => {
         </div>
       </div>
     </template>
+
+    <div class="fixed left-[-9999px] top-[-9999px] overflow-visible">
+      <div id="shadow-export-area">
+        <FamilyExportTemplate
+          v-if="activeRootData"
+          :treeData="getTreeData(activeTab)"
+          :maxGen="activeMaxGen"
+          :count="getFamilyData(activeTab).length"
+          :activeBaniName="activeRootData.name"
+          :viewType="viewType"
+        />
+      </div>
+    </div>
 
     <!-- Modal Modals -->
     <FamilyDeleteModal
