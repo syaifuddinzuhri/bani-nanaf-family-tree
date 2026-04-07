@@ -42,14 +42,14 @@ const handleSave = async () => {
         <div>
           <label
             class="block text-[10px] font-black uppercase text-slate-400 mb-2 ml-1"
-            >Pilih Nasab / Bani</label
+            >Pilih Keluarga</label
           >
           <select
             v-model="selectedRoot"
             class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 text-sm font-bold outline-none focus:border-emerald-500"
           >
             <option v-for="r in roots" :key="r.id" :value="r.id">
-              Nasab {{ r.name }}
+              Keluarga {{ r.name }}
             </option>
           </select>
         </div>
