@@ -23,7 +23,7 @@ const gridData = computed(() => generateGrid(props.rootNode, props.maxGen));
           <th
             v-for="n in maxGen"
             :key="n"
-            class="p-4 border-r border-slate-200 text-left text-[10px] font-black uppercase text-slate-500 tracking-widest w-[250px]"
+            class="p-4 border-r border-slate-200 text-left text-[14px] font-black uppercase text-slate-500 tracking-widest w-[250px]"
           >
             Generasi {{ n }}
           </th>
@@ -58,13 +58,13 @@ const gridData = computed(() => generateGrid(props.rootNode, props.maxGen));
                 </div>
                 <div>
                   <div
-                    class="font-black text-slate-900 text-sm uppercase leading-tight line-clamp-2 tracking-tight"
+                    class="font-black text-slate-900 text-[14px] uppercase leading-tight line-clamp-2 tracking-tight"
                   >
                     {{ cell.name }}
                   </div>
                   <div
                     v-if="cell.spouse"
-                    class="text-[12px] text-emerald-600 italic mt-1 font-bold"
+                    class="text-[13px] text-emerald-600 italic mt-1 font-bold"
                   >
                     + {{ cell.spouse }}
                   </div>

@@ -32,18 +32,18 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
           </div>
           <div class="h-10 w-px bg-slate-200"></div>
           <p
-            class="text-emerald-600 font-black uppercase text-xs tracking-[0.5em]"
+            class="text-emerald-600 font-black uppercase text-xl tracking-[0.5em]"
           >
             Dokumen Digital Bani Nanaf
           </p>
         </div>
         <h2
-          class="text-6xl font-black text-slate-900 uppercase italic tracking-tighter leading-none"
+          class="text-5xl font-black text-slate-900 uppercase italic tracking-tighter leading-none"
         >
           Silsilah Keluarga {{ activeBaniName }}
         </h2>
         <p
-          class="text-slate-400 font-bold text-xs uppercase tracking-widest mt-4"
+          class="text-slate-400 font-bold text-xl uppercase tracking-widest mt-4"
         >
           Keluarga Besar Bani Nanaf • Update: {{ currentDate }}
         </p>
@@ -56,7 +56,7 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
           <div class="text-4xl font-black text-emerald-600 leading-none">
             {{ count }}
           </div>
-          <div class="text-[10px] font-black uppercase text-slate-400 mt-2">
+          <div class="text-lg font-black uppercase text-slate-400 mt-2">
             Anggota
           </div>
         </div>
@@ -65,7 +65,7 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
           <div class="text-4xl font-black text-emerald-600 leading-none">
             {{ maxGen }}
           </div>
-          <div class="text-[10px] font-black uppercase text-slate-400 mt-2">
+          <div class="text-lg font-black uppercase text-slate-400 mt-2">
             Generasi
           </div>
         </div>
@@ -81,10 +81,10 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
           <div v-for="n in maxGen" :key="n" class="w-[280px] flex-shrink-0">
             <div class="pl-8 border-l-4 border-emerald-500">
               <span
-                class="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] block mb-2"
+                class="text-sm font-black text-slate-400 uppercase tracking-[0.4em] block mb-2"
                 >Generasi</span
               >
-              <div class="text-6xl font-black text-slate-600 leading-none">
+              <div class="text-4xl font-black text-slate-600 leading-none">
                 0{{ n }}
               </div>
             </div>
