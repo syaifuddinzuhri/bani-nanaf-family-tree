@@ -5,11 +5,18 @@
     <div class="max-w-full mx-auto space-y-6">
       <!-- Copyright Section -->
       <div class="space-y-2">
-        <p
-          class="text-slate-400 text-[10px] font-black uppercase tracking-[0.5em]"
-        >
-          &copy; 2026 Dokumen Digital Bani Nanaf
-        </p>
+        <div class="flex flex-col md:flex-row gap-x-2 justify-center">
+          <p
+            class="text-slate-400 text-[10px] font-black uppercase tracking-[0.5em]"
+          >
+            &copy; 2026
+          </p>
+          <p
+            class="text-slate-400 text-[10px] font-black uppercase tracking-[0.5em]"
+          >
+            Dokumen Digital Bani Nanaf
+          </p>
+        </div>
         <p
           class="text-slate-300 text-[9px] leading-relaxed uppercase font-bold tracking-widest"
         >

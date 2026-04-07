@@ -41,21 +41,30 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
             class="w-12 h-12 object-contain"
           />
           <div class="h-8 w-px bg-slate-200 hidden lg:block"></div>
-          <p
-            class="text-emerald-600 font-black uppercase text-[10px] tracking-[0.3em]"
-          >
-            Dokumen Digital Bani Nanaf
-          </p>
+          <div class="flex flex-col md:flex-row gap-x-2">
+            <p
+              class="text-emerald-600 font-black uppercase text-[10px] tracking-[0.3em]"
+            >
+              Dokumen Digital
+            </p>
+
+            <p
+              class="text-emerald-600 font-black uppercase text-[10px] tracking-[0.3em]"
+            >
+              Bani Nanaf
+            </p>
+          </div>
         </div>
 
         <h2
-          class="text-3xl md:text-5xl font-black text-slate-900 uppercase italic leading-none tracking-tighter"
+          class="text-2xl md:text-5xl font-black text-slate-900 uppercase italic leading-none tracking-tighter"
         >
-          Silsilah Keluarga <br> {{ activeBaniName }}
+          Silsilah Keluarga <br />
+          {{ activeBaniName }}
         </h2>
 
         <div
-          class="flex items-center justify-center lg:justify-start gap-3 text-slate-400 font-bold text-[8px] md:text-[10px] uppercase tracking-widest"
+          class="flex items-center justify-center lg:justify-start gap-3 text-slate-400 font-bold text-[7px] md:text-[10px] uppercase tracking-widest"
         >
           <span>Keluarga Besar Bani Nanaf</span>
           <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
@@ -92,8 +101,6 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
     </div>
 
     <div class="relative pt-6 p-4 md:p-6">
-      <!-- HINT (Akan ikut terfoto, tapi kita bisa sembunyikan jika mau) -->
-      <!-- Jika ingin hint hilang di gambar, tambahkan class 'data-html2canvas-ignore' -->
 
       <!-- RENDER TABLE -->
       <div
