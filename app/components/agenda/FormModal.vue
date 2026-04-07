@@ -142,7 +142,7 @@ const handleSave = async () => {
           <input
             v-model="form.location"
             type="text"
-            placeholder="Contoh: Rumah Kediaman Bpk. X"
+            placeholder="Contoh: Talang Watuagung Prigen"
             class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 text-sm font-bold outline-none"
           />
         </div>
