@@ -130,7 +130,7 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
                     class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]"
                     >Generasi</span
                   >
-                  <div class="text-5xl font-black text-slate-200">0{{ n }}</div>
+                  <div class="text-5xl font-black text-slate-600">0{{ n }}</div>
                 </div>
               </div>
             </div>
