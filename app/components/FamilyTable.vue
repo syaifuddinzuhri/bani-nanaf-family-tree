@@ -10,6 +10,7 @@ const props = defineProps<{
 
 const emit = defineEmits(["edit", "delete"]);
 const { generateGrid } = useTableGrid();
+const { formatName } = useFormatName();
 const gridData = computed(() => generateGrid(props.rootNode, props.maxGen));
 </script>
 
@@ -66,7 +67,7 @@ const gridData = computed(() => generateGrid(props.rootNode, props.maxGen));
                     v-if="cell.spouse"
                     class="text-[14px] text-emerald-600 italic mt-1 font-bold"
                   >
-                    + {{ cell.spouse }}
+                    + {{ formatName(cell.spouse) }}
                   </div>
                 </div>
               </div>

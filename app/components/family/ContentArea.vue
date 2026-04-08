@@ -36,7 +36,7 @@ const currentDate = new Date().toLocaleDateString("id-ID", {
           class="flex items-center justify-center lg:justify-start gap-4 mb-2"
         >
           <img
-            src="/logo-green.webp"
+            src="/logo-web.webp"
             alt="Logo"
             class="w-12 h-12 object-contain"
           />

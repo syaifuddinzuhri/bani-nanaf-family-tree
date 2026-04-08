@@ -175,7 +175,7 @@ const confirmDelete = async () => {
 
                 <!-- Name -->
                 <span
-                  class="text-sm font-black text-slate-800 uppercase italic tracking-tight truncate leading-none"
+                  class="text-sm font-black text-slate-800 uppercase tracking-tight truncate leading-none"
                 >
                   {{ item.name }}
                 </span>

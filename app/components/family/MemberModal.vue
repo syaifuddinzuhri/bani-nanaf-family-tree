@@ -10,7 +10,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits(["close", "save"]);
-
+const { formatName } = useFormatName();
 const afterMemberId = ref(""); // Menyimpan ID saudara yang dipilih sebagai patokan
 const formError = ref("");
 const isInitializing = ref(false);
@@ -246,7 +246,7 @@ const handlePrepareSave = () => {
             >
               <option :value="null" disabled>-- Pilih Orang Tua --</option>
               <option v-for="p in parentOptions" :key="p.id" :value="p.id">
-                Gen {{ p.gen }} - {{ p.name }} {{ p.spouse ? `+ ${p.spouse}` : '' }}
+                Gen {{ p.gen }} - {{ formatName(p.name) }} {{ p.spouse ? `+ ${formatName(p.spouse)}` : '' }}
               </option>
             </select>
           </div>

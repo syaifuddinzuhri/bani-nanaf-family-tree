@@ -34,7 +34,7 @@ watch(isMenuOpen, (val) => {
           class="relative w-11 h-11 flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
         >
           <img
-            src="/logo-green.webp"
+            src="/logo-web.webp"
             alt="Logo Bani Nanaf"
             class="w-full h-full object-contain filter drop-shadow-sm"
           />

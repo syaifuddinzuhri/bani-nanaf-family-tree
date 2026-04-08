@@ -12,6 +12,8 @@ watch(
   (newId) => (selectedRoot.value = newId)
 );
 
+const { formatName } = useFormatName();
+
 const handleSave = async () => {
   if (!namesText.value || !selectedRoot.value) return;
   isSubmitting.value = true;
@@ -49,7 +51,7 @@ const handleSave = async () => {
             class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 text-sm font-bold outline-none focus:border-emerald-500"
           >
             <option v-for="r in roots" :key="r.id" :value="r.id">
-              Keluarga {{ r.name }} {{ r.spouse ? `+ ${r.spouse}` : '' }}
+              Keluarga {{ formatName(r.name) }} {{ r.spouse ? `+ ${formatName(r.spouse)}` : '' }}
             </option>
           </select>
         </div>

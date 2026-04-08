@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { FamilyMemberNode } from "~/types/family";
 defineProps<{ node: FamilyMemberNode }>();
+
+const { formatName } = useFormatName();
+
 </script>
 
 <template>
@@ -40,7 +43,7 @@ defineProps<{ node: FamilyMemberNode }>();
           v-if="node.spouse"
           class="text-[14px] text-emerald-600 italic font-bold line-clamp-2"
         >
-          + {{ node.spouse }}
+          + {{ formatName(node.spouse) }}
         </div>
       </div>
 
