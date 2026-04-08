@@ -281,91 +281,79 @@ const confirmDelete = async () => {
         <div class="max-w-full mx-auto px-6 md:px-12 lg:px-24">
           <div v-if="activeRootData" class="animate-in fade-in duration-700">
             <div
-              class="bg-white rounded-[3.5rem] shadow-2xl shadow-slate-200/60 border border-slate-200 overflow-hidden mb-20"
+              class="flex flex-col md:flex-row justify-end items-end md:items-start mb-6 gap-3"
             >
-              <div class="p-6 md:p-8">
-                <!-- <FamilyStatsCard
-                  :name="activeRootData.name"
-                  :count="getFamilyData(activeTab).length"
-                  :gen="activeMaxGen"
-                /> -->
-
-                <div
-                  class="flex flex-col md:flex-row justify-end items-end md:items-start mb-6 gap-3"
+              <div class="relative w-full md:w-auto">
+                <button
+                  @click="showExportMenu = !showExportMenu"
+                  class="w-full md:w-auto flex items-center justify-center gap-2 px-6 py-2.5 bg-white border-2 border-slate-200 text-slate-600 rounded-2xl text-xs font-black uppercase shadow-sm hover:border-emerald-500 transition-all"
                 >
-                  <div class="relative w-full md:w-auto">
-                    <button
-                      @click="showExportMenu = !showExportMenu"
-                      class="w-full md:w-auto flex items-center justify-center gap-2 px-6 py-2.5 bg-white border-2 border-slate-200 text-slate-600 rounded-2xl text-xs font-black uppercase shadow-sm hover:border-emerald-500 transition-all"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-4 w-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="3"
-                      >
-                        <path
-                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                        />
-                      </svg>
-                      Simpan Dokumen
-                    </button>
-                    <!-- Dropdown Menu Export -->
-                    <div
-                      v-if="showExportMenu"
-                      class="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-2xl border border-slate-100 z-50 overflow-hidden animate-in zoom-in-95"
-                    >
-                      <button
-                        @click="handleExport('png')"
-                        class="w-full text-left px-5 py-4 text-[10px] font-black uppercase text-slate-600 hover:bg-slate-50 border-b flex justify-between"
-                      >
-                        Format Gambar <span>HD</span>
-                      </button>
-                      <button
-                        @click="handleExport('pdf')"
-                        class="w-full text-left px-5 py-4 text-[10px] font-black uppercase text-slate-600 hover:bg-slate-50 flex justify-between"
-                      >
-                        Format PDF <span>A4</span>
-                      </button>
-                    </div>
-                  </div>
-                  <button
-                    v-if="user"
-                    @click="onAdd"
-                    class="w-full md:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl text-xs font-black uppercase shadow-lg shadow-emerald-200 hover:bg-emerald-700 transition-all active:scale-95"
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="3"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="3"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M12 4v16m8-8H4"
-                      />
-                    </svg>
-                    Tambah Anggota
+                    <path
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                    />
+                  </svg>
+                  Simpan Dokumen
+                </button>
+                <!-- Dropdown Menu Export -->
+                <div
+                  v-if="showExportMenu"
+                  class="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-2xl border border-slate-100 z-50 overflow-hidden animate-in zoom-in-95"
+                >
+                  <button
+                    @click="handleExport('png')"
+                    class="w-full text-left px-5 py-4 text-[10px] font-black uppercase text-slate-600 hover:bg-slate-50 border-b flex justify-between"
+                  >
+                    Format Gambar <span>HD</span>
+                  </button>
+                  <button
+                    @click="handleExport('pdf')"
+                    class="w-full text-left px-5 py-4 text-[10px] font-black uppercase text-slate-600 hover:bg-slate-50 flex justify-between"
+                  >
+                    Format PDF <span>A4</span>
                   </button>
                 </div>
-
-                <FamilyContentArea
-                  :viewType="viewType"
-                  :treeData="getTreeData(activeTab)"
-                  :maxGen="activeMaxGen"
-                  :count="getFamilyData(activeTab).length"
-                  :isAdmin="!!user"
-                  :activeBaniName="activeBaniNameFull"
-                  @edit="onEdit"
-                  @delete="onDelete"
-                />
               </div>
+              <button
+                v-if="user"
+                @click="onAdd"
+                class="w-full md:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl text-xs font-black uppercase shadow-lg shadow-emerald-200 hover:bg-emerald-700 transition-all active:scale-95"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="3"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 4v16m8-8H4"
+                  />
+                </svg>
+                Tambah Anggota
+              </button>
             </div>
+
+            <FamilyContentArea
+              :viewType="viewType"
+              :treeData="getTreeData(activeTab)"
+              :maxGen="activeMaxGen"
+              :count="getFamilyData(activeTab).length"
+              :isAdmin="!!user"
+              :activeBaniName="activeBaniNameFull"
+              @edit="onEdit"
+              @delete="onDelete"
+            />
           </div>
         </div>
       </div>
