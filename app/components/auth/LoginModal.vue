@@ -3,7 +3,7 @@ const { login } = useAuth();
 const props = defineProps<{ show: boolean }>();
 const emit = defineEmits(["close"]);
 
-const email = ref("admin@baninanaf.com");
+const email = ref("adminprivate");
 const password = ref("");
 const errorMsg = ref("");
 const isSubmitting = ref(false);
